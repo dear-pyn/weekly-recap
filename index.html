@@ -1,0 +1,1351 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Maintain-D Weekly Retro</title><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Mali:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&display=swap">
+<style>
+/* Layout: one week per page — question of the week on top, then a corkboard of GIF polaroids, Oopsie Daisy notes, and a Hall of Fame of bouquets */
+:root{
+  --bg:#f3f1f7; --paper:#ffffff; --ink:#221d2b; --muted:#6a6377; --line:#e3dfea;
+  --accent:#a80689; --accent-ink:#ffffff; --accent-soft:#fbeaf7; --tape:#ffe48a; --empty:#ebe8f0;
+  --daisy:#fff6d6; --daisy-line:#f2d77a; --leaf:#5aa36b;
+  --sky1:#dcefff; --sky2:#f4fbe9; --grass:#8fd18a;
+  --e1:#f0645a; --e2:#f59a3c; --e3:#f2c94c; --e4:#9bd35a; --e5:#3fbf7f;
+  --display:"Mali","IBM Plex Sans Thai",system-ui,sans-serif;
+  --body:"IBM Plex Sans Thai",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --shadow:0 1px 2px rgba(34,29,43,.06),0 8px 22px rgba(34,29,43,.08);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#16131c; --paper:#211d29; --ink:#efeaf5; --muted:#a69db4; --line:#352f40;
+  --accent:#e070cc; --accent-ink:#1a0f18; --accent-soft:#3a2338; --tape:#8a7330; --empty:#2a2533;
+  --daisy:#33301f; --daisy-line:#6b5d2a; --leaf:#7cc48b;
+  --sky1:#1a2233; --sky2:#1b2620; --grass:#4f8a55;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px rgba(0,0,0,.35); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#16131c; --paper:#211d29; --ink:#efeaf5; --muted:#a69db4; --line:#352f40;
+  --accent:#e070cc; --accent-ink:#1a0f18; --accent-soft:#3a2338; --tape:#8a7330; --empty:#2a2533;
+  --daisy:#33301f; --daisy-line:#6b5d2a; --leaf:#7cc48b;
+  --sky1:#1a2233; --sky2:#1b2620; --grass:#4f8a55;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 22px rgba(0,0,0,.35); color-scheme:dark}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.55}
+.wrap{max-width:1180px;margin:0 auto;padding-block:24px 72px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:22px}
+h1,h2,h3{font-family:var(--display);margin:0;line-height:1.2;text-wrap:balance}
+h1{font-size:30px;font-weight:700}
+h2{font-size:21px;font-weight:700}
+.muted{color:var(--muted)}
+.note{font-size:13px;color:var(--muted)}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+svg.bat{display:block;overflow:visible}
+.cta{border:0;background:var(--accent);color:var(--accent-ink);padding:10px 18px;border-radius:999px;font-weight:600;box-shadow:var(--shadow);white-space:nowrap}
+.cta:hover{filter:brightness(1.06)}
+.cta:disabled{opacity:.6;cursor:default}
+.ghost{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:8px 14px;white-space:nowrap}
+.ghost:hover{border-color:var(--accent);color:var(--accent)}
+.textlink{border:0;background:transparent;color:var(--muted);text-decoration:underline;padding:4px;font-size:14px}
+.textlink:hover{color:var(--accent)}
+.av{border-radius:50%;object-fit:cover;background:var(--empty);flex:none}
+
+header{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:flex-end;justify-content:space-between}
+header .t{display:flex;flex-direction:column;gap:4px;min-width:0}
+.hright{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.weeknav{display:flex;align-items:center;gap:4px;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:4px}
+.weeknav button{border:0;background:transparent;width:34px;height:34px;border-radius:50%;font-size:18px}
+.weeknav button:hover:not(:disabled){background:var(--accent-soft)}
+.weeknav button:disabled{opacity:.35;cursor:default}
+.weeknav .lbl{font-weight:600;min-width:150px;text-align:center;font-variant-numeric:tabular-nums}
+.me{display:flex;align-items:center;gap:8px;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:4px 12px 4px 4px}
+.me img{width:28px;height:28px}
+.me select{border:0;background:transparent;font-weight:600;padding:2px}
+.past{background:var(--tape);color:#3d3000;border-radius:999px;padding:2px 10px;font-size:12.5px;font-weight:600}
+
+.answerbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;background:var(--accent-soft);border:1px solid var(--accent);border-radius:14px;padding:10px 12px 10px 16px}
+.answerbar span{font-weight:500;min-width:0}
+.banner{background:var(--paper);border:1px dashed var(--line);border-radius:12px;padding:10px 14px;font-size:13.5px;color:var(--muted)}
+
+/* tabs */
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);overflow-x:auto}
+.tabs a{padding:10px 14px;text-decoration:none;color:var(--muted);font-weight:600;border-bottom:2px solid transparent;white-space:nowrap}
+.tabs a[aria-current="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+.tabs a .c{font-weight:500;font-size:12.5px;background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:1px 7px;margin-left:4px}
+.tabpanel{display:flex;flex-direction:column;gap:22px}
+
+/* compact question bar (board tab) */
+.qbar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;background:var(--paper);border-radius:16px;box-shadow:var(--shadow);padding:12px 16px}
+.qbar .qmain{display:flex;gap:10px;align-items:center;flex:1 1 320px;min-width:0}
+.qbar .qmain img{width:36px;height:36px}
+.qbar .qmain>div{min-width:0}
+.qbar .k{font-size:12px;color:var(--muted)}
+.qbar .qt{font-family:var(--display);font-size:18px;font-weight:600;line-height:1.3;overflow-wrap:anywhere}
+.qbar .qside{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.stack{display:flex}
+.stack img{width:26px;height:26px;margin-left:-7px;border:2px solid var(--paper)}
+.stack img:first-child{margin-left:0}
+.qbar .qset{flex:1 1 100%}
+.bubble{position:relative;background:var(--accent-soft);border-radius:12px;padding:7px 10px;font-size:13.5px;line-height:1.45;overflow-wrap:anywhere;white-space:pre-wrap}
+.bubble::before{content:"";position:absolute;top:-6px;left:18px;border:6px solid transparent;border-top:0;border-bottom-color:var(--accent-soft)}
+.bubble b{display:block;font-size:11.5px;color:var(--accent);font-weight:600}
+
+/* question (Q&A tab) */
+.q{background:var(--paper);border-radius:18px;box-shadow:var(--shadow);padding:18px 20px;display:flex;flex-direction:column;gap:14px}
+.qa-list{display:flex;flex-direction:column;gap:0}
+.qa-row{display:grid;grid-template-columns:36px 140px 1fr;gap:12px;align-items:start;padding:12px 2px;border-top:1px solid var(--line)}
+.qa-row:first-child{border-top:0}
+.qa-row img{width:36px;height:36px}
+.qa-row .nm{font-weight:600;padding-top:6px}
+.qa-row .nm small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.qa-row p{margin:0;padding-top:6px;overflow-wrap:anywhere;white-space:pre-wrap;min-width:0}
+.qa-row.no p{color:var(--muted);font-style:italic}
+@media (max-width:560px){.qa-row{grid-template-columns:36px 1fr}.qa-row p{grid-column:2}}
+.qhead{display:flex;gap:12px;align-items:center}
+.qhead img{width:44px;height:44px}
+.qhead .k{font-size:12.5px;color:var(--muted)}
+.qtext{font-family:var(--display);font-size:22px;font-weight:600;line-height:1.3;overflow-wrap:anywhere}
+.qset{display:flex;gap:8px;flex-wrap:wrap}
+.qset input{flex:1 1 260px;min-width:0;border:1px solid var(--line);border-radius:12px;background:var(--bg);padding:10px 12px}
+.answers{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.ans{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border-radius:12px;padding:10px 12px;min-width:0}
+.ans img{width:30px;height:30px}
+.ans div{min-width:0}
+.ans b{font-size:13px}
+.ans p{margin:0;font-size:14px;overflow-wrap:anywhere;white-space:pre-wrap}
+
+/* section heads */
+.sh{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between}
+.sh .l{display:flex;flex-direction:column;gap:2px;min-width:0}
+.energyrow{display:flex;align-items:center;gap:10px;font-size:13.5px;color:var(--muted)}
+
+/* gif board */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:24px 18px;align-items:start}
+.tile{position:relative;background:var(--paper);border-radius:6px;padding:10px 10px 12px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:9px;min-width:0;transform:rotate(var(--tilt,0deg));transition:transform .18s}
+.tile:hover{transform:rotate(0deg) translateY(-2px)}
+.tile::before{content:"";position:absolute;top:-9px;left:50%;width:70px;height:18px;margin-left:-35px;background:var(--tape);opacity:.85;transform:rotate(-3deg);border-radius:2px;z-index:1}
+.media{position:relative;aspect-ratio:1/1;border-radius:3px;overflow:hidden;background:var(--empty);display:grid;place-items:center}
+.media img.gif{position:relative;z-index:1;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 4px 10px rgba(0,0,0,.25))}
+.media.fill::before{content:"";position:absolute;inset:-24px;background:var(--bg) center/cover no-repeat;filter:blur(20px) saturate(1.3);opacity:.7;transform:scale(1.1)}
+.media.fill::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 50%,transparent 45%,rgba(0,0,0,.18))}
+.media .badges{z-index:2}
+.media .big{width:44%;aspect-ratio:1;border-radius:50%;object-fit:cover;filter:grayscale(1);opacity:.5}
+.media .linkgif{display:flex;flex-direction:column;align-items:center;gap:6px;text-decoration:none;color:var(--accent);font-weight:600;padding:12px;text-align:center}
+.badges{position:absolute;right:8px;bottom:8px;display:flex;gap:6px;align-items:center}
+.badge{background:var(--paper);border-radius:14px;padding:4px 8px;box-shadow:var(--shadow);display:flex;gap:5px;align-items:center;font-size:12px;font-weight:600}
+.badge.mood{font-size:20px;padding:2px 8px}
+/* stickers stuck on a tile */
+.sticker{position:absolute;z-index:3;display:block;border:0;background:transparent;padding:0;line-height:1;text-decoration:none;transform:rotate(var(--r,0deg));filter:drop-shadow(0 0 0 #fff) drop-shadow(2px 0 0 #fff) drop-shadow(-2px 0 0 #fff) drop-shadow(0 2px 0 #fff) drop-shadow(0 -2px 0 #fff) drop-shadow(0 4px 6px rgba(34,29,43,.28));transition:transform .15s}
+.sticker:hover{transform:rotate(var(--r,0deg)) scale(1.08)}
+.gift-st{font-size:64px;cursor:pointer}
+.gift-st .n{position:absolute;right:-6px;bottom:-4px;font-family:var(--body);font-size:12px;font-weight:700;background:var(--accent);color:var(--accent-ink);border-radius:999px;padding:1px 6px;filter:none}
+.daisy-st{left:-18px;top:2px;width:120px;height:120px;--r:-10deg}
+@media (max-width:560px){.gift-st{font-size:48px}.daisy-st{width:92px;height:92px}}
+.daisy-st svg{width:100%;height:100%;display:block}
+.daisy-st .dn{position:absolute;right:14px;bottom:10px;font-family:var(--body);font-size:12px;font-weight:700;background:var(--accent);color:var(--accent-ink);border-radius:999px;padding:1px 6px}
+.more-st{font-size:13px;font-weight:700;background:var(--paper);color:var(--accent);border-radius:999px;padding:4px 9px}
+.sticker.pop{animation:slap .55s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes slap{0%{transform:rotate(var(--r,0deg)) scale(2.4);opacity:0}60%{opacity:1}100%{transform:rotate(var(--r,0deg)) scale(1)}}
+.who{display:flex;gap:10px;align-items:center;min-width:0}
+.who img.face{width:40px;height:40px;border:2px solid var(--paper);box-shadow:0 0 0 1px var(--line);margin-top:-28px;position:relative;z-index:1}
+.who .n{font-family:var(--display);font-weight:600;font-size:17px;line-height:1.1}
+.who .r{font-size:12px;color:var(--muted)}
+.who>div{min-width:0}
+.cap{margin:0;font-family:var(--display);font-size:15px;line-height:1.4;overflow-wrap:anywhere}
+.cap::before{content:"“"}.cap::after{content:"”"}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:6px;flex-wrap:wrap}
+.reacts{display:flex;flex-wrap:wrap;gap:4px}
+.reacts button{border:1px solid var(--line);background:transparent;border-radius:999px;padding:1px 7px;font-size:13px;font-variant-numeric:tabular-nums}
+.reacts button.on{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+.giftbtn{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:2px 10px;font-size:13px}
+.giftbtn:hover{border-color:var(--accent);color:var(--accent)}
+.gotgifts{font-size:13px;color:var(--muted)}
+.empty-cta{border:1px dashed var(--line);background:transparent;border-radius:8px;padding:8px;color:var(--muted);font-size:13.5px}
+.empty-cta:hover{border-color:var(--accent);color:var(--accent)}
+.edit{border:0;background:transparent;color:var(--muted);font-size:12px;text-decoration:underline;padding:0}
+
+/* oopsie daisy */
+.daisies{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.daisy{background:var(--daisy);border:1px solid var(--daisy-line);border-radius:16px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;min-width:0;position:relative}
+.daisy .top{display:flex;gap:10px;align-items:center}
+.daisy .top img{width:34px;height:34px}
+.daisy .flower{position:absolute;right:8px;top:-14px;width:56px;height:56px;transform:rotate(10deg)}
+.daisy .flower svg{width:100%;height:100%;display:block}
+.daisy .top{padding-right:52px}
+.daisy dl{margin:0;display:flex;flex-direction:column;gap:6px}
+.daisy dt{font-size:12.5px;color:var(--muted);font-weight:600}
+.daisy dd{margin:0;overflow-wrap:anywhere;white-space:pre-wrap}
+.cheer{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.cheer button{border:1px solid var(--daisy-line);background:var(--paper);border-radius:999px;padding:3px 12px;font-size:13px}
+.cheer button.on{background:var(--leaf);border-color:var(--leaf);color:#fff}
+.cheer .faces img{width:22px;height:22px;margin-left:-6px;border:1.5px solid var(--daisy)}
+.cheer .faces img:first-child{margin-left:0}
+.daisy-empty{border:1px dashed var(--daisy-line);border-radius:16px;padding:16px;color:var(--muted);font-size:14px}
+/* daisy garden: friends water a daisy, it grows taller and smiles more */
+.garden{border-radius:22px;padding:6px 16px 18px;background:linear-gradient(180deg,var(--sky1),var(--sky2));gap:18px 14px;align-items:start}
+.garden .daisy-empty{grid-column:1/-1;margin-top:12px;background:var(--paper)}
+.plot{display:flex;flex-direction:column;align-items:center;min-width:0}
+.plant{height:176px;display:flex;flex-direction:column;justify-content:flex-end;align-items:center}
+.plant .head{width:78px;height:78px;display:block;transform-origin:50% 92%;animation:sway 4s ease-in-out infinite;filter:drop-shadow(0 3px 4px rgba(34,29,43,.18))}
+.plant .head svg{width:100%;height:100%;display:block}
+.plant .head.boing{animation:boing .7s cubic-bezier(.2,1.6,.4,1)}
+.plant .stem{position:relative;width:7px;border-radius:4px 4px 0 0;background:var(--leaf);margin-top:-8px;transition:height .6s cubic-bezier(.2,1.4,.4,1)}
+.plant .leaf{position:absolute;width:22px;height:12px;background:var(--leaf);border-radius:0 100% 0 100%;bottom:30%}
+.plant .leaf.l{right:5px;transform:rotate(-20deg)}
+.plant .leaf.r{left:5px;transform:scaleX(-1) rotate(-20deg)}
+.plot .daisy{width:100%;box-sizing:border-box;border-top:8px solid var(--grass)}
+.plot .daisy .top{padding-right:0}
+.plot .mood{font-size:12px;font-weight:600;border-radius:999px;padding:1px 9px;background:var(--paper);border:1px solid var(--daisy-line);color:var(--muted);white-space:nowrap}
+.plot .mood.lv2{background:var(--leaf);border-color:var(--leaf);color:#fff}
+.rain{position:fixed;pointer-events:none;font-size:20px;z-index:1000;animation:rain .9s ease-in forwards}
+@keyframes rain{0%{transform:translateY(-60px);opacity:0}20%{opacity:1}100%{transform:translateY(40px);opacity:0}}
+@keyframes sway{0%,100%{transform:rotate(-4deg)}50%{transform:rotate(4deg)}}
+@keyframes boing{0%{transform:scale(1)}40%{transform:scale(1.25) rotate(6deg)}100%{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){.plant .head,.plant .head.boing{animation:none}.plant .stem{transition:none}.rain{display:none}}
+
+/* hall of fame — game arena (always dark, like a stage) */
+.arena{position:relative;overflow:hidden;isolation:isolate;border-radius:22px;padding:22px 18px 22px;color:#fff;background:radial-gradient(120% 85% at 50% 18%,#8a1f96 0%,#3a0d4a 48%,#12081f 100%);box-shadow:var(--shadow)}
+.arena::before{content:"";position:absolute;inset:-60%;z-index:-2;background:repeating-conic-gradient(from 0deg at 50% 50%,rgba(255,215,110,.09) 0 7deg,transparent 7deg 15deg);animation:spin 80s linear infinite}
+.arena::after{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:radial-gradient(2px 2px at 12% 22%,#fff8 50%,transparent 51%),radial-gradient(2px 2px at 82% 14%,#fff9 50%,transparent 51%),radial-gradient(1.5px 1.5px at 66% 40%,#ffe7a0 50%,transparent 51%),radial-gradient(2px 2px at 30% 70%,#fff7 50%,transparent 51%),radial-gradient(1.5px 1.5px at 90% 62%,#ffe7a0 50%,transparent 51%),radial-gradient(2px 2px at 6% 88%,#fff6 50%,transparent 51%),radial-gradient(1.5px 1.5px at 48% 8%,#fff 50%,transparent 51%)}
+@keyframes spin{to{transform:rotate(360deg)}}
+.a-top{display:flex;flex-wrap:wrap;gap:12px 16px;align-items:center;justify-content:space-between}
+.a-top .l{display:flex;flex-direction:column;gap:6px;min-width:0}
+.a-title{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:700;font-size:clamp(28px,6vw,44px);letter-spacing:.05em;line-height:1.05}
+.a-title .gold{background:linear-gradient(180deg,#fff6c8,#ffd34d 48%,#e09a10);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 3px 0 #7a3d00) drop-shadow(0 8px 18px rgba(255,190,40,.35))}
+.a-sub{font-size:13.5px;color:#eadbf4}
+.shot{border:0;border-radius:999px;padding:11px 20px;font-weight:700;font-size:15px;background:linear-gradient(180deg,#ffe27a,#f5b417);color:#3d2400;box-shadow:0 4px 0 #b77800,0 10px 22px rgba(0,0,0,.35);white-space:nowrap}
+.shot:hover{filter:brightness(1.05)}
+.shot:active{transform:translateY(3px);box-shadow:0 1px 0 #b77800,0 6px 12px rgba(0,0,0,.3)}
+.shot:focus-visible,.arena button:focus-visible{outline:2px solid #ffd34d;outline-offset:3px}
+.podium{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:end;gap:10px;max-width:660px;margin:34px auto 0}
+.pd{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0;text-align:center}
+.pd .hero{all:unset;box-sizing:border-box;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0;max-width:100%;border-radius:14px;padding:2px 4px}
+.pd .ring{position:relative;width:78px;height:78px;border-radius:50%;padding:4px;background:var(--medal);box-shadow:0 0 0 3px rgba(255,255,255,.14),0 0 28px var(--glow);flex:none}
+.pd .ring img{width:100%;height:100%;border-radius:50%;object-fit:cover;background:#2a1c38;display:block}
+.pd .ring .q{display:grid;place-items:center;width:100%;height:100%;border-radius:50%;background:#2a1c38;font-family:var(--display);font-size:28px;color:#ffffff80}
+.pd.top1 .ring{width:108px;height:108px}
+.pd .crownx{position:absolute;top:-34px;left:50%;font-size:36px;line-height:1;transform:translateX(-50%) rotate(-8deg);animation:bob 2.4s ease-in-out infinite;filter:drop-shadow(0 4px 6px rgba(0,0,0,.4))}
+@keyframes bob{50%{transform:translateX(-50%) rotate(8deg) translateY(-5px)}}
+.pd .nm{font-family:var(--display);font-weight:700;font-size:18px;line-height:1.2;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pd .ttl{font-size:12px;font-weight:600;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.24);border-radius:999px;padding:1px 9px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pd.top1 .ttl{background:#ffd34d;border-color:#ffd34d;color:#3d2400}
+.pd .sc{font-size:14px;color:#ffe9a8;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pd .mini,.ladder .mini{border:0;background:transparent;color:#eadbf4;font-size:12.5px;text-decoration:underline;padding:2px 4px;white-space:nowrap}
+.pd .mini:hover,.ladder .mini:hover{color:#ffd34d}
+.plinth{width:100%;border-radius:12px 12px 4px 4px;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:40px;line-height:1;color:rgba(60,30,0,.4);background:var(--medal);box-shadow:inset 0 -8px 0 rgba(0,0,0,.18),inset 0 5px 0 rgba(255,255,255,.35)}
+.pd.top1 .plinth{height:124px;font-size:52px}.pd.top2 .plinth{height:88px}.pd.top3 .plinth{height:62px}
+.pd.m1{--medal:linear-gradient(160deg,#fff3b0,#f5c22e 50%,#c98a00);--glow:rgba(255,200,40,.7)}
+.pd.m2{--medal:linear-gradient(160deg,#ffffff,#c9d1dc 50%,#8a95a5);--glow:rgba(210,225,255,.5)}
+.pd.m3{--medal:linear-gradient(160deg,#ffd9b8,#d98b4a 50%,#9a5320);--glow:rgba(240,150,80,.5)}
+.pd.empty .ring,.pd.empty .plinth{opacity:.35}
+.pd.empty .ttl{opacity:.7}
+.ladder{list-style:none;margin:16px auto 0;padding:0;display:flex;flex-direction:column;gap:6px;max-width:660px}
+.ladder li{display:grid;grid-template-columns:36px 32px minmax(0,1fr) auto auto;gap:10px;align-items:center;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);border-radius:12px;padding:6px 8px 6px 10px}
+.ladder .rk{font-family:var(--display);font-weight:700;font-size:17px;color:#ffd34d;text-align:center;font-variant-numeric:tabular-nums}
+.ladder img{width:32px;height:32px}
+.ladder .who2{all:unset;cursor:pointer;min-width:0;display:flex;flex-direction:column;border-radius:6px}
+.ladder .who2 b{font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ladder .who2 span{font-size:12px;color:#eadbf4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ladder .em{font-size:14px;color:#ffe9a8;white-space:nowrap;font-variant-numeric:tabular-nums}
+.a-empty{text-align:center;padding:34px 12px 14px;color:#eadbf4;display:flex;flex-direction:column;align-items:center;gap:8px}
+.a-empty .big{font-size:52px;line-height:1}
+.shotwrap{background:#12081f;border-radius:12px;display:grid;place-items:center;min-height:220px;overflow:hidden}
+.shotwrap img{display:block;max-width:100%;max-height:62dvh;object-fit:contain}
+.shotwrap .note{color:#eadbf4}
+@media (max-width:560px){.pd .ring{width:60px;height:60px}.pd.top1 .ring{width:84px;height:84px}.pd .nm{font-size:15px}.pd .crownx{font-size:28px;top:-27px}.pd.top1 .plinth{height:96px;font-size:40px}.pd.top2 .plinth{height:68px;font-size:32px}.pd.top3 .plinth{height:48px;font-size:28px}.ladder li{grid-template-columns:30px 28px minmax(0,1fr) auto;}.ladder li .em{display:none}.ladder img{width:28px;height:28px}}
+@media (prefers-reduced-motion:reduce){.arena::before,.pd .crownx{animation:none}}
+
+/* dialogs */
+dialog{border:0;border-radius:18px;padding:0;background:var(--paper);color:var(--ink);width:min(560px,calc(100vw - 32px));max-height:calc(100dvh - 32px);box-shadow:0 20px 60px rgba(0,0,0,.25)}
+dialog::backdrop{background:rgba(20,15,25,.45)}
+dialog form,dialog .body{display:flex;flex-direction:column;gap:16px;padding:22px}
+.fhead{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.x{border:0;background:transparent;font-size:22px;line-height:1;color:var(--muted)}
+.lab{font-weight:600;font-size:14px;display:block;margin-bottom:8px}
+.lab small{font-weight:400;color:var(--muted)}
+.field select,.field input[type=text],.field input[type=url],.field textarea{width:100%;box-sizing:border-box;border:1px solid var(--line);border-radius:10px;background:var(--bg);padding:9px 11px}
+.field textarea{min-height:84px;resize:vertical}
+.counter{font-size:12px;color:var(--muted);text-align:right;margin-top:4px;font-variant-numeric:tabular-nums}
+.drop{border:2px dashed var(--line);border-radius:14px;aspect-ratio:16/10;display:flex;flex-direction:column;gap:8px;align-items:center;justify-content:center;background:var(--bg);text-align:center;padding:12px;position:relative;overflow:hidden}
+.drop.over{border-color:var(--accent);background:var(--accent-soft)}
+.drop img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:var(--bg)}
+.drop .ico{font-size:34px;line-height:1}
+.drop .pick,.drop .swap{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:5px 14px;font-size:13px;position:relative;z-index:1}
+.drop .swap{position:absolute;right:10px;bottom:10px}
+details.link summary{cursor:pointer;font-size:13px;color:var(--muted)}
+details.link[open] summary{margin-bottom:8px}
+.levels{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.chips input,.levels input{position:absolute;opacity:0;pointer-events:none}
+.levels label{display:flex;flex-direction:column;align-items:center;gap:4px;border:1.5px solid var(--line);border-radius:14px;padding:8px 4px 6px;font-size:11.5px;text-align:center;cursor:pointer;line-height:1.25;color:var(--muted)}
+.levels input:checked+label,.chips input:checked+label{border-color:var(--accent);background:var(--accent-soft);color:var(--ink);font-weight:600}
+.levels input:focus-visible+label,.chips input:focus-visible+label{outline:2px solid var(--accent);outline-offset:2px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{border:1.5px solid var(--line);border-radius:12px;padding:4px 10px;font-size:22px;cursor:pointer;line-height:1.3}
+.giftchips{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.giftchips label{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px 6px;font-size:12px;text-align:center}
+.giftchips label .e{font-size:34px;line-height:1.1;filter:drop-shadow(1px 0 0 #fff) drop-shadow(-1px 0 0 #fff) drop-shadow(0 1px 0 #fff) drop-shadow(0 -1px 0 #fff) drop-shadow(0 2px 3px rgba(34,29,43,.25))}
+.err{color:var(--e1);font-size:13px;margin:0}
+.actions{display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;align-items:center}
+.qpop .qtext{font-size:21px}
+.qpop .stack{display:flex;flex-direction:column;align-items:stretch;gap:4px}
+.qpop .stack .cta{padding:12px 18px;font-size:16px}
+.qpop .stack .textlink{align-self:center}
+.notes{display:flex;flex-direction:column;gap:10px;max-height:60vh;overflow:auto}
+.notes .n1{display:flex;gap:10px;align-items:flex-start;background:var(--bg);border-radius:12px;padding:10px 12px}
+.notes .n1 img{width:30px;height:30px}
+.notes .n1 .g{font-size:22px;line-height:1}
+.notes .n1 p{margin:2px 0 0;overflow-wrap:anywhere}
+
+/* send animation */
+.fly{position:fixed;pointer-events:none;font-size:28px;z-index:1000;animation:fly 1.3s ease-out forwards}
+@keyframes fly{0%{transform:translate(0,0) scale(.6) rotate(0);opacity:0}15%{opacity:1}100%{transform:translate(var(--dx),-170px) scale(1.25) rotate(var(--rot));opacity:0}}
+.toast{position:fixed;left:50%;bottom:max(20px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:999px;font-weight:600;z-index:1001;box-shadow:var(--shadow)}
+@media (prefers-reduced-motion:reduce){.tile,.tile:hover{transform:none;transition:none}.fly{display:none}}
+@media (max-width:560px){h1{font-size:25px}.grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:20px 12px}.weeknav .lbl{min-width:118px}.levels label{font-size:10.5px}.qtext{font-size:19px}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="t">
+      <span class="muted">PEA Maintain-D · Weekly Retro <span class="past" id="pasttag" hidden>ย้อนหลัง</span></span>
+      <h1>สัปดาห์นี้เป็นไงกันบ้าง?</h1>
+      <span class="muted">GIF หนึ่งอัน คำถามหนึ่งข้อ แปะเดซี่ให้ตัวเอง แล้วส่งดอกไม้ให้เพื่อน</span>
+    </div>
+    <div class="hright">
+      <label class="me" for="me-select"><img class="av" id="me-img" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=" hidden><span class="note">ฉันคือ</span><select id="me-select"></select></label>
+      <div class="weeknav" aria-label="เลือกสัปดาห์">
+        <button type="button" id="prev" aria-label="สัปดาห์ก่อน">‹</button>
+        <span class="lbl" id="wlabel"></span>
+        <button type="button" id="next" aria-label="สัปดาห์ถัดไป">›</button>
+      </div>
+    </div>
+  </header>
+
+  <nav class="tabs" aria-label="มุมมอง">
+    <a href="#board" data-tab="board">บอร์ด</a>
+    <a href="#qa" data-tab="qa">คำถาม–คำตอบ<span class="c" id="qa-count" hidden></span></a>
+  </nav>
+
+  <div class="answerbar" id="answerbar" hidden>
+    <span id="answerbar-t">ยังไม่ได้ตอบคำถามประจำสัปดาห์</span>
+    <button type="button" class="cta" id="answer-now">ตอบเลย</button>
+  </div>
+  <div class="banner" id="banner" hidden></div>
+
+  <section class="q" id="tab-qa" data-panel="qa" aria-labelledby="qa-h" hidden>
+    <h2 id="qa-h" class="sr" hidden>คำถาม–คำตอบ</h2>
+    <div id="qa-body"></div>
+  </section>
+
+  <div class="tabpanel" id="tab-board" data-panel="board">
+  <section class="arena" aria-labelledby="hof-h">
+    <div class="a-top">
+      <div class="l">
+        <h2 id="hof-h" class="a-title"><span aria-hidden="true">🏆</span><span class="gold">HALL OF FAME</span></h2>
+        <span class="a-sub">ยิ่งได้ของขวัญจากเพื่อนมาก ยิ่งได้ขึ้นแท่นสูง กดที่ชื่อเพื่ออ่านคำขอบคุณ</span>
+      </div>
+      <button type="button" class="shot" id="hof-shot" hidden>📸 โหลดรูปไปอวด</button>
+    </div>
+    <div id="hof"></div>
+  </section>
+
+  <section class="qbar" id="qcard" aria-label="คำถามประจำสัปดาห์"></section>
+
+  <section aria-labelledby="gif-h" style="display:flex;flex-direction:column;gap:16px">
+    <div class="sh">
+      <div class="l"><h2 id="gif-h">🎞️ GIF ประจำสัปดาห์</h2><span class="energyrow" id="energyrow"></span></div>
+      <button type="button" class="cta" id="open-gif">+ ลง GIF ของฉัน</button>
+    </div>
+    <div class="grid" id="grid" aria-live="polite"></div>
+  </section>
+
+  <section aria-labelledby="daisy-h" style="display:flex;flex-direction:column;gap:14px">
+    <div class="sh">
+      <div class="l"><h2 id="daisy-h">🌼 สวน Oopsie Daisy</h2><span class="note">พลาดได้ เล่าได้ ปลูกเดซี่ของตัวเองไว้ในสวน เพื่อนรดน้ำให้ แล้วเดซี่จะค่อย ๆ ยิ้มกว้างขึ้น</span></div>
+      <button type="button" class="ghost" id="open-daisy">🌱 ปลูกเดซี่ของฉัน</button>
+    </div>
+    <div class="daisies garden" id="daisies"></div>
+  </section>
+
+  </div>
+</div>
+
+<!-- question popup -->
+<dialog id="dq" class="qpop" aria-labelledby="dq-t">
+  <form id="fq" novalidate>
+    <div class="qhead"><img class="av" id="dq-av" alt=""><div><div class="k" id="dq-k"></div><div class="qtext" id="dq-t"></div></div></div>
+    <div class="field" id="dq-mefield" hidden>
+      <label class="lab" for="dq-me">ฉันคือ</label>
+      <select id="dq-me"></select>
+    </div>
+    <div class="field">
+      <label class="lab" for="dq-a">คำตอบของฉัน</label>
+      <textarea id="dq-a" maxlength="300" placeholder="ตอบสั้น ๆ ก็ได้"></textarea>
+    </div>
+    <p class="err" id="dq-err" hidden></p>
+    <div class="stack">
+      <button type="submit" class="cta" id="dq-send">ส่งคำตอบแล้วเข้าบอร์ด</button>
+      <button type="button" class="textlink" id="dq-later">ขอตอบทีหลัง</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- gif check-in -->
+<dialog id="dg">
+  <form id="fg" novalidate>
+    <div class="fhead"><h2 id="dg-t">ลง GIF ประจำสัปดาห์</h2><button type="button" class="x" data-close aria-label="ปิด">×</button></div>
+    <div class="field">
+      <label class="lab" for="dg-me">ฉันคือ</label>
+      <select id="dg-me"></select>
+    </div>
+    <div class="field">
+      <span class="lab">GIF ตลก ๆ ที่เล่าสัปดาห์นี้ หรือสิ่งที่ชอบ</span>
+      <div class="drop" id="drop">
+        <img id="preview" alt="ตัวอย่าง GIF" hidden>
+        <span class="ico" id="dropico">🎞️</span>
+        <span class="note" id="dropmsg">ลากไฟล์ GIF มาวาง หรือกดเลือกไฟล์</span>
+        <button type="button" class="pick" id="pick">เลือกไฟล์</button>
+        <button type="button" class="swap" id="swap" hidden>เปลี่ยน GIF</button>
+        <input type="file" id="dg-file" accept="image/gif,image/webp,image/png,image/jpeg" hidden>
+      </div>
+      <p class="note" id="drophelp">ให้ GIF ขยับได้: บน GIPHY คลิกขวาที่ GIF เลือก “Save image as…” (บันทึกเป็น .gif) แล้วลากไฟล์มาวางตรงนี้ · ไม่เกิน 20 MB</p>
+      <p class="err" id="dg-still" hidden>รูปที่ copy มาจะเป็นภาพนิ่ง ไม่ขยับ อยากให้ขยับให้บันทึกไฟล์ .gif แล้วลากมาวางแทน</p>
+      <details class="link" id="linkbox">
+        <summary>ไม่มีไฟล์? ใช้ลิงก์ GIF แทน</summary>
+        <input type="url" id="dg-link" placeholder="https://giphy.com/gifs/…" aria-label="ลิงก์ GIF">
+        <p class="note">ลิงก์ GIPHY หรือลิงก์ที่ลงท้ายด้วย .gif จะแสดงบนบอร์ดได้เลย ลิงก์อื่นอาจขึ้นเป็นปุ่ม “เปิด GIF”</p>
+      </details>
+    </div>
+    <div class="field">
+      <label class="lab" for="dg-cap">แคปชัน <small>(ไม่ใส่ก็ได้)</small></label>
+      <input type="text" id="dg-cap" maxlength="100" placeholder="เช่น ปิดงาน Overhaul ได้แล้ว ขอนอนยาว ๆ">
+      <div class="counter" id="dg-capc">0/100</div>
+    </div>
+    <div class="field">
+      <span class="lab" id="lvl-lab">พลังตอนนี้ <small>(ไม่เลือกก็ได้ · กดซ้ำเพื่อยกเลิก)</small></span>
+      <div class="levels" id="levels" role="radiogroup" aria-labelledby="lvl-lab"></div>
+    </div>
+    <div class="field">
+      <span class="lab" id="mood-lab">อีโมจิความรู้สึก <small>(ไม่เลือกก็ได้)</small></span>
+      <div class="chips" id="moods" role="radiogroup" aria-labelledby="mood-lab"></div>
+    </div>
+    <p class="err" id="dg-err" hidden></p>
+    <div class="actions">
+      <button type="button" class="ghost" data-close>ยกเลิก</button>
+      <button type="submit" class="cta" id="dg-save">ลงบอร์ด</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- oopsie daisy -->
+<dialog id="dd">
+  <form id="fd" novalidate>
+    <div class="fhead"><h2 id="dd-t">🌱 ปลูกเดซี่ของฉัน</h2><button type="button" class="x" data-close aria-label="ปิด">×</button></div>
+    <div class="field">
+      <label class="lab" for="dd-me">ฉันคือ</label>
+      <select id="dd-me"></select>
+    </div>
+    <div class="field">
+      <label class="lab" for="dd-story">มีอะไรที่ฉันอยากเล่า?</label>
+      <textarea id="dd-story" maxlength="300" placeholder="เรื่องที่พลาด หรือเรื่องที่ไม่เป็นอย่างที่คิด"></textarea>
+    </div>
+    <div class="field">
+      <label class="lab" for="dd-next">ครั้งหน้าอยากลองอะไร?</label>
+      <textarea id="dd-next" maxlength="300" placeholder="สิ่งที่อยากลองทำต่างไปจากเดิม"></textarea>
+    </div>
+    <p class="err" id="dd-err" hidden></p>
+    <div class="actions">
+      <button type="button" class="textlink" id="dd-remove" hidden>เอาเดซี่ออก</button>
+      <button type="button" class="ghost" data-close>ยกเลิก</button>
+      <button type="submit" class="cta" id="dd-save">แปะเดซี่</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- proud pal -->
+<dialog id="dp">
+  <form id="fp" novalidate>
+    <div class="fhead"><h2 id="dp-t">💐 ส่งดอกไม้ให้เพื่อน</h2><button type="button" class="x" data-close aria-label="ปิด">×</button></div>
+    <div class="field" id="dp-mefield">
+      <label class="lab" for="dp-me">ฉันคือ</label>
+      <select id="dp-me"></select>
+    </div>
+    <div class="field">
+      <span class="lab" id="gift-lab">เลือกของขวัญ</span>
+      <div class="chips giftchips" id="gifts" role="radiogroup" aria-labelledby="gift-lab"></div>
+    </div>
+    <p class="note" id="dp-again" hidden></p>
+    <div class="field">
+      <label class="lab" for="dp-note">ขอบคุณเรื่องอะไร</label>
+      <input type="text" id="dp-note" maxlength="100" placeholder="เช่น ขอบคุณที่ช่วยไล่บั๊กจนดึก">
+      <div class="counter" id="dp-notec">0/100</div>
+    </div>
+    <p class="err" id="dp-err" hidden></p>
+    <div class="actions">
+      <button type="button" class="ghost" data-close>ยกเลิก</button>
+      <button type="submit" class="cta" id="dp-send">ส่งเลย</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- thank-you notes -->
+<dialog id="dn">
+  <div class="body">
+    <div class="fhead"><h2 id="dn-t"></h2><button type="button" class="x" data-close aria-label="ปิด">×</button></div>
+    <div class="notes" id="dn-list"></div>
+  </div>
+</dialog>
+
+<!-- brag image -->
+<dialog id="dshot" aria-labelledby="dshot-t">
+  <div class="body">
+    <div class="fhead"><h2 id="dshot-t">📸 รูปไปอวด</h2><button type="button" class="x" data-close aria-label="ปิด">×</button></div>
+    <div class="shotwrap"><img id="shot-img" alt="" hidden><span class="note" id="shot-wait">กำลังวาดรูป…</span></div>
+    <p class="err" id="shot-err" hidden></p>
+    <p class="note" id="shot-tip" hidden>หน้านี้บันทึกไฟล์ให้ไม่ได้ คลิกขวาหรือกดค้างที่รูป แล้วเลือกบันทึกรูป</p>
+    <div class="actions">
+      <button type="button" class="ghost" data-close>ปิด</button>
+      <button type="button" class="cta" id="shot-save" disabled>💾 บันทึกรูป</button>
+    </div>
+  </div>
+</dialog>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="config.js"></script>
+<script src="store.js"></script>
+<script>
+(function(){
+  const blobUrl = id => window.retroBlobUrl ? window.retroBlobUrl(id) : '/_blob/'+id;
+  const MEMBERS = [
+    {k:"arubub",n:"Arubub",r:"Product Designer"},
+    {k:"anu",n:"anu",r:""},
+    {k:"liinux",n:"Liinux",r:"Designer"},
+    {k:"famiefame",n:"FamieFame",r:"Face of the group"},
+    {k:"por",n:"Por",r:"QA"},
+    {k:"thekong",n:"TheKong",r:"QA"},
+    {k:"petch",n:"Petch",r:"Developer"},
+    {k:"kaewkaew",n:"KaewKaew",r:"Developer"},
+    {k:"dew",n:"Dew",r:"Developer"},
+    {k:"tek",n:"Tek",r:""},
+    {k:"ford",n:"Ford",r:"Developer"},
+    {k:"pond",n:"Pond",r:"Developer"},
+    {k:"panudet",n:"panudet",r:""},
+    {k:"yew",n:"Yew",r:"Developer"},
+    {k:"pun",n:"Pun",r:""},
+    {k:"dear",n:"Dear",r:"",img:"avatars/dear.png"}
+  ];
+  const ROTATION_START = "2026-11-16";  // week the first person in MEMBERS asks
+  const LEVELS = [null,{t:"ขอชาร์จก่อน",c:"var(--e1)"},{t:"แบตอ่อน",c:"var(--e2)"},{t:"พอไหว",c:"var(--e3)"},{t:"ไฟดี",c:"var(--e4)"},{t:"ชาร์จเต็ม!",c:"var(--e5)"}];
+  const MOODS = ["😆","🥰","😌","😐","🥲","😵‍💫","😤","🤯"];
+  const GIFTS = [{e:"💐",t:"ช่อดอกไม้"},{e:"🧸",t:"ตุ๊กตาหมี"},{e:"🎁",t:"ของขวัญ"},{e:"🏆",t:"ถ้วยรางวัล"},{e:"🌟",t:"ดาวเด่น"},{e:"🎈",t:"ลูกโป่ง"},{e:"🍰",t:"เค้ก"},{e:"🧋",t:"ชานม"}];
+  const GIFT_SLOTS = [
+    {s:'top:14px;right:-12px',r:12},{s:'top:40%;right:-14px',r:-9},{s:'top:30%;left:30%',r:-12},{s:'top:52%;left:-10px',r:8}
+  ];
+  let justSent = '';
+  // daisy face: 0 = sad but smiling (teary eyes, worried brows, small smile), 1 = smiling through a tear, 2 = full bloom
+  const bloom = n => n>=3 ? 2 : n>=1 ? 1 : 0;
+  const BLOOM_T = ['เศร้านิด ๆ แต่ยังยิ้มได้','เริ่มยิ้มแล้ว','บานสะพรั่ง 🌼'];
+  function daisyFace(lv, stem){
+    const ink='#5b3a12';
+    const petals = Array.from({length:12},(_,i)=>`<ellipse cx="60" cy="${lv===2?25:27}" rx="11" ry="${lv===2?25:23}" transform="rotate(${i*30} 60 60)" fill="#ffffff" stroke="#e8e2d0" stroke-width="1.5"/>`).join('');
+    const brows = lv===0 ? `<path d="M45 50 l10 -4 M65 46 l10 4" stroke="${ink}" stroke-width="2.6" stroke-linecap="round"/>`
+                : lv===1 ? `<path d="M46 49 q5 -3 10 -1 M64 48 q5 -2 10 1" stroke="${ink}" stroke-width="2.4" fill="none" stroke-linecap="round"/>` : '';
+    const eyes = lv===2
+      ? `<path d="M46 59 q5 -6 10 0 M64 59 q5 -6 10 0" stroke="${ink}" stroke-width="2.8" fill="none" stroke-linecap="round"/>`
+      : `<circle cx="51" cy="58" r="${lv===0?3.6:3.2}" fill="${ink}"/><circle cx="69" cy="58" r="${lv===0?3.6:3.2}" fill="${ink}"/><circle cx="52.3" cy="56.6" r="1.2" fill="#fff"/><circle cx="70.3" cy="56.6" r="1.2" fill="#fff"/>`
+        + (lv===0 ? `<path d="M46 61.5 q5 2.4 10 0 M64 61.5 q5 2.4 10 0" stroke="#6fb6f0" stroke-width="1.8" fill="none" stroke-linecap="round"/>` : '');
+    const tear = lv===2 ? '' : `<path d="M${lv===0?47:73} 63 q3.4 6.5 0 9.5 q-3.4 -3 0 -9.5z" fill="#6fb6f0" stroke="#4d9ad8" stroke-width=".8"/>`;
+    const mouth = lv===0 ? `<path d="M54 70 q6 4 12 0" stroke="${ink}" stroke-width="2.6" fill="none" stroke-linecap="round"/>`
+                : lv===1 ? `<path d="M51 68 q9 8 18 0" stroke="${ink}" stroke-width="2.8" fill="none" stroke-linecap="round"/>`
+                : `<path d="M50 66 q10 13 20 0 z" fill="${ink}"/><path d="M54 70.5 q6 4.5 12 0" fill="#ff8fb1"/>`;
+    const blush = `<ellipse cx="45" cy="66" rx="4.6" ry="2.8" fill="#ff8fb1" opacity="${lv===0?.45:.8}"/><ellipse cx="75" cy="66" rx="4.6" ry="2.8" fill="#ff8fb1" opacity="${lv===0?.45:.8}"/>`;
+    const spark = lv===2 ? `<path d="M100 18 l2.5 6 6 2.5 -6 2.5 -2.5 6 -2.5 -6 -6 -2.5 6 -2.5z M18 30 l1.8 4.2 4.2 1.8 -4.2 1.8 -1.8 4.2 -1.8 -4.2 -4.2 -1.8 4.2 -1.8z" fill="#f2c94c"/>` : '';
+    const st = stem ? `<path d="M60 92 q-4 18 4 26" stroke="var(--leaf)" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M62 108 q14 -10 22 -2 q-12 8 -22 2z" fill="var(--leaf)"/>` : '';
+    return `<svg viewBox="0 0 120 120" aria-hidden="true">${st}<g transform="rotate(14 60 60)">${petals}</g><circle cx="60" cy="60" r="23" fill="#f6c443" stroke="#e0a91f" stroke-width="2"/>${brows}${eyes}${blush}${mouth}${tear}${spark}</svg>`;
+  }
+  const REACTS = ["❤️","😂","👏","🔥"];
+  const TH_M = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+  const byKey = Object.fromEntries(MEMBERS.map(m=>[m.k,m]));
+  const nameOf = k => byKey[k]?.n || k;
+  const av = k => (byKey[k] && byKey[k].img) || "avatars/"+k+".webp";
+  const $ = id => document.getElementById(id);
+  const el = (tag, attrs={}, kids=[]) => { const e=document.createElement(tag); for (const a in attrs){ const v=attrs[a]; if(v==null||v===false) continue; if(a==='text') e.textContent=v; else if(a==='class') e.className=v; else if(a==='html') e.innerHTML=v; else if(a.startsWith('on')) e.addEventListener(a.slice(2),v); else e.setAttribute(a,v===true?'':v);} [].concat(kids).forEach(c=>c&&e.appendChild(c)); return e; };
+  const store = { get(k){try{return localStorage.getItem(k)}catch{return null}}, set(k,v){try{localStorage.setItem(k,v)}catch{}} };
+
+  function battery(level, w){
+    const h = w*0.62, L = Math.max(0,Math.min(5,Math.round(level||0)));
+    const col = L ? LEVELS[L].c : 'var(--line)';
+    const segs = [0,1,2,3,4].map(i => `<rect x="${10+i*13}" y="13" width="11" height="30" rx="3" fill="${i<L?col:'var(--empty)'}"/>`).join('');
+    let eyes, mouth, extra='';
+    if (L>=5){ eyes=`<path d="M27 27 q4 -6 8 0 M45 27 q4 -6 8 0" stroke="var(--ink)" stroke-width="2.6" fill="none" stroke-linecap="round"/>`; mouth=`<path d="M33 33 q7 8 14 0 z" fill="var(--ink)"/>`; extra=`<path d="M86 4 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2z" fill="var(--e3)"/>`; }
+    else if (L===4){ eyes=`<circle cx="31" cy="26" r="3" fill="var(--ink)"/><circle cx="49" cy="26" r="3" fill="var(--ink)"/>`; mouth=`<path d="M33 32 q7 6 14 0" stroke="var(--ink)" stroke-width="2.6" fill="none" stroke-linecap="round"/>`; }
+    else if (L===3){ eyes=`<circle cx="31" cy="26" r="3" fill="var(--ink)"/><circle cx="49" cy="26" r="3" fill="var(--ink)"/>`; mouth=`<path d="M34 34 h12" stroke="var(--ink)" stroke-width="2.6" stroke-linecap="round"/>`; }
+    else if (L===2){ eyes=`<path d="M27 26 h8 M45 26 h8" stroke="var(--ink)" stroke-width="2.6" stroke-linecap="round"/>`; mouth=`<path d="M33 36 q7 -5 14 0" stroke="var(--ink)" stroke-width="2.6" fill="none" stroke-linecap="round"/>`; extra=`<path d="M60 16 q3 5 0 8 q-3 -3 0 -8z" fill="var(--e2)" opacity=".8"/>`; }
+    else if (L===1){ eyes=`<path d="M27 26 q4 4 8 0 M45 26 q4 4 8 0" stroke="var(--ink)" stroke-width="2.6" fill="none" stroke-linecap="round"/>`; mouth=`<ellipse cx="40" cy="35" rx="3.5" ry="2.6" fill="var(--ink)"/>`; extra=`<text x="80" y="10" font-size="11" font-weight="700" fill="var(--muted)" font-family="sans-serif">z</text>`; }
+    else { eyes=`<circle cx="31" cy="26" r="2.6" fill="var(--muted)"/><circle cx="49" cy="26" r="2.6" fill="var(--muted)"/>`; mouth=`<path d="M35 34 h10" stroke="var(--muted)" stroke-width="2.4" stroke-linecap="round"/>`; }
+    const cheeks = L>=3 ? `<ellipse cx="24" cy="32" rx="3.6" ry="2.3" fill="#ff8fb1" opacity=".75"/><ellipse cx="56" cy="32" rx="3.6" ry="2.3" fill="#ff8fb1" opacity=".75"/>` : '';
+    return `<svg class="bat" width="${w}" height="${h}" viewBox="0 0 92 56" aria-hidden="true"><rect x="4" y="7" width="74" height="42" rx="10" fill="var(--paper)" stroke="var(--ink)" stroke-width="3"/><rect x="79" y="20" width="7" height="16" rx="3" fill="var(--ink)"/>${segs}${cheeks}${eyes}${mouth}${extra}</svg>`;
+  }
+
+  // ---- weeks
+  const pad = n => String(n).padStart(2,'0');
+  const keyOf = d => d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+  const parseKey = s => { const [y,m,d]=s.split('-').map(Number); return new Date(y,m-1,d); };
+  const mondayOf = d => { const x=new Date(d.getFullYear(),d.getMonth(),d.getDate()); x.setDate(x.getDate()-((x.getDay()+6)%7)); return x; };
+  const addDays = (d,n) => { const x=new Date(d); x.setDate(x.getDate()+n); return x; };
+  const thisMon = mondayOf(new Date());
+  let mon = thisMon;
+  const W = () => keyOf(mon);
+  const isNow = () => W()===keyOf(thisMon);
+  const label = m => { const f=addDays(m,4); return m.getDate()+(m.getMonth()!==f.getMonth()?' '+TH_M[m.getMonth()]:'')+'–'+f.getDate()+' '+TH_M[f.getMonth()]+' '+String(f.getFullYear()+543).slice(-2); };
+  function askerOf(m){
+    const diff = Math.round((mondayOf(m) - parseKey(ROTATION_START)) / (7*86400000));
+    const n = MEMBERS.length; return MEMBERS[((diff % n) + n) % n].k;
+  }
+
+  // ---- state
+  let db=null, assets=null, user=null, uid=null, canWrite=null, downloads=null;
+  let me = store.get('retro.me') || store.get('vibe.me') || '';
+  if (!byKey[me]) me='';
+  const S = {checkins:{}, reacts:[], question:null, answers:{}, daisies:[], cheers:[], gifts:[], ready:false};
+  const unsubs = [];
+  let pendingFile=null, editingGif=null, giftTo=null, popupShownFor='';
+  const tilt = k => { let h=0; for (const c of k) h=(h*31+c.charCodeAt(0))%997; return ((h%7)-3)*0.6; };
+
+  // ---- helpers
+  function showBanner(t){ const b=$('banner'); b.textContent=t||''; b.hidden=!t; }
+  function toast(t){ document.querySelectorAll('.toast').forEach(o=>o.remove()); const x=el('div',{class:'toast',role:'status',text:t}); document.body.appendChild(x); setTimeout(()=>x.remove(),2200); }
+  function setErr(id,t){ const e=$(id); e.textContent=t||''; e.hidden=!t; }
+  function openDlg(d){ if (d.open) return; try{ d.showModal(); }catch{ d.setAttribute('open',''); } }
+  function closeDlg(d){ try{ d.close(); }catch{ d.removeAttribute('open'); } }
+  document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>closeDlg(b.closest('dialog'))));
+  function fillMemberSelect(sel, value, placeholder){
+    sel.textContent='';
+    if (placeholder) sel.appendChild(el('option',{value:'',text:placeholder}));
+    MEMBERS.forEach(m=>sel.appendChild(el('option',{value:m.k,text:m.n+(m.r?' · '+m.r:'')})));
+    sel.value = value||'';
+  }
+  function setMe(k){
+    me = byKey[k] ? k : '';
+    store.set('retro.me', me);
+    $('me-select').value = me;
+    const img=$('me-img'); if (me){ img.src=av(me); img.hidden=false; } else img.hidden=true;
+    renderAll(); maybePopup();
+  }
+  function skipKey(){ return `retro.skip.${W()}.${me||'anon'}`; }
+  function needAnswer(){ return !!(S.question && S.question.text && me && !S.answers[me]); }
+
+  // ---- render
+  function renderAll(){
+    $('wlabel').textContent = (isNow()?'สัปดาห์นี้ · ':'')+label(mon);
+    $('next').disabled = mon>=thisMon;
+    $('pasttag').hidden = isNow();
+    renderAnswerBar(); renderQuestion(); renderQA(); renderEnergy(); renderGrid(); renderDaisies(); renderHof(); showTab();
+    const ro = canWrite===false;
+    ['open-gif','open-daisy'].forEach(id=>$(id).hidden=ro);
+  }
+
+  function renderAnswerBar(){
+    const show = S.ready && needAnswer() && canWrite!==false;
+    $('answerbar').hidden = !show;
+    if (show) $('answerbar-t').textContent = `${nameOf(me)} ยังไม่ได้ตอบคำถาม${isNow()?'สัปดาห์นี้':'ของสัปดาห์ '+label(mon)}`;
+  }
+
+  const answered = () => MEMBERS.filter(m=>S.answers[m.k]);
+
+  // compact bar on the board tab
+  function renderQuestion(){
+    const box=$('qcard'); box.textContent='';
+    const asker = S.question?.asker || askerOf(mon);
+    const has = !!(S.question && S.question.text);
+    const txt = has ? S.question.text : !S.ready ? 'กำลังโหลด…' : canWrite===false ? 'ยังไม่มีคำถามสำหรับสัปดาห์นี้' : me===asker ? 'ถึงตาคุณแล้ว ตั้งคำถามให้ทีมตอบสัปดาห์นี้' : `รอ ${nameOf(asker)} ตั้งคำถาม`;
+    box.appendChild(el('div',{class:'qmain'},[el('img',{class:'av',src:av(asker),alt:''}),el('div',{},[el('div',{class:'k',text:`❓ คำถามประจำสัปดาห์ · ถึงตา ${nameOf(asker)}`}),el('div',{class:has?'qt':'note',text:txt})])]));
+    if (has){
+      const a=answered();
+      box.appendChild(el('div',{class:'qside'},[
+        a.length ? el('div',{class:'stack'},a.slice(0,6).map(m=>el('img',{class:'av',src:av(m.k),alt:m.n,title:m.n}))) : null,
+        el('span',{class:'note',text: a.length ? `ตอบแล้ว ${a.length}/${MEMBERS.length}` : 'ยังไม่มีใครตอบ'}),
+        el('a',{class:'ghost',href:'#qa',text:'ดูคำตอบทั้งหมด →',style:'text-decoration:none'})
+      ]));
+    } else if (S.ready && canWrite!==false){
+      const mine = me===asker;
+      const inp = el('input',{type:'text',id:'q-input',maxlength:'140',placeholder: mine ? 'เช่น ถ้าได้หยุด 1 วันจะไปทำอะไร?' : `ตั้งคำถามแทน ${nameOf(asker)} (ถ้าเจ้าตัวไม่อยู่)`,'aria-label':'คำถามประจำสัปดาห์'});
+      const btn = el('button',{type:'button',class:'cta',text:'ตั้งคำถาม',onclick:()=>saveQuestion(inp.value, asker)});
+      inp.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); saveQuestion(inp.value, asker);} });
+      box.appendChild(el('div',{class:'qset'},[inp,btn]));
+    }
+  }
+
+  // full list on the Q&A tab
+  function renderQA(){
+    const body=$('qa-body'); body.textContent='';
+    const a=answered();
+    const cnt=$('qa-count'); cnt.textContent=String(a.length); cnt.hidden=!a.length;
+    const asker = S.question?.asker || askerOf(mon);
+    const has = !!(S.question && S.question.text);
+    body.appendChild(el('div',{class:'qhead'},[el('img',{class:'av',src:av(asker),alt:''}),el('div',{},[
+      el('div',{class:'k',text:`❓ คำถามจาก ${nameOf(asker)} · ${label(mon)}`}),
+      el('div',{class:'qtext',text: has ? S.question.text : (S.ready ? 'สัปดาห์นี้ยังไม่มีคำถาม' : 'กำลังโหลด…')})
+    ])]));
+    if (!has) return;
+    body.appendChild(el('div',{class:'note',text:`ตอบแล้ว ${a.length}/${MEMBERS.length} คน`}));
+    const list=el('div',{class:'qa-list',id:'qa-list'});
+    const rows=[...a, ...MEMBERS.filter(m=>!S.answers[m.k])];
+    rows.forEach(m=>{
+      const ans=S.answers[m.k];
+      list.appendChild(el('div',{class:'qa-row'+(ans?'':' no')},[
+        el('img',{class:'av',src:av(m.k),alt:''}),
+        el('div',{class:'nm'},[document.createTextNode(m.n), m.r?el('small',{text:m.r}):null]),
+        el('p',{text: ans ? ans.text : 'ยังไม่ได้ตอบ'})
+      ]));
+    });
+    body.appendChild(list);
+    if (canWrite!==false && me){
+      body.appendChild(el('div',{},[el('button',{type:'button',class: S.answers[me]?'textlink':'cta',text: S.answers[me]?'แก้คำตอบของฉัน':'ตอบคำถามนี้',onclick:()=>openQuestionPopup(!!S.answers[me])})]));
+    }
+  }
+
+  // tabs (hash)
+  function currentTab(){ return (location.hash||'').slice(1)==='qa' ? 'qa' : 'board'; }
+  function showTab(){
+    const t=currentTab();
+    document.querySelectorAll('.tabs a').forEach(a=>a.setAttribute('aria-current', a.dataset.tab===t?'true':'false'));
+    document.querySelectorAll('[data-panel]').forEach(p=>p.hidden = p.dataset.panel!==t);
+  }
+  addEventListener('hashchange',()=>{ showTab(); scrollTo(0,0); });
+
+  function renderEnergy(){
+    const lv = MEMBERS.map(m=>S.checkins[m.k]?.energy).filter(n=>n>=1&&n<=5);
+    const row=$('energyrow'); row.textContent='';
+    const n = MEMBERS.filter(m=>S.checkins[m.k]).length;
+    if (lv.length){ const a=lv.reduce((x,y)=>x+y,0)/lv.length; row.append(el('span',{html:battery(a,40)}), el('span',{text:`พลังทีมเฉลี่ย ${a.toFixed(1)}/5 จาก ${lv.length} คน · ลง GIF แล้ว ${n}/${MEMBERS.length}`})); }
+    else row.textContent = S.ready ? `ลง GIF แล้ว ${n}/${MEMBERS.length} คน` : 'กำลังโหลด…';
+  }
+
+  function renderGrid(){
+    const g=$('grid'); g.textContent='';
+    const giftCount = k => S.gifts.filter(x=>x.to===k).length;
+    const order=[...MEMBERS].sort((a,b)=>(S.checkins[b.k]?1:0)-(S.checkins[a.k]?1:0) || (S.checkins[b.k]?.updatedAt||'').localeCompare(S.checkins[a.k]?.updatedAt||''));
+    order.forEach(m=>{
+      const c=S.checkins[m.k];
+      const t=el('article',{class:'tile',style:`--tilt:${tilt(m.k+W())}deg`,'data-member':m.k});
+      const media=el('div',{class:'media'});
+      const fill = u => { media.classList.add('fill'); media.style.setProperty('--bg',`url("${u}")`); };
+      if (c && c.gif){ fill(blobUrl(c.gif)); }
+      if (c && c.gif) media.appendChild(el('img',{class:'gif',src:blobUrl(c.gif),alt:`GIF ของ ${m.n}`,loading:'lazy',onerror:e=>{ media.classList.remove('fill'); e.target.replaceWith(el('span',{class:'note',text:'GIF ถูกลบไปแล้ว'})); }}));
+      else if (c && c.link){
+        const btn=()=>el('a',{class:'linkgif',href:c.link,target:'_blank',rel:'noopener'},[el('span',{text:'🎞️',style:'font-size:34px'}),el('span',{text:'เปิด GIF ↗'})]);
+        const src=gifSrc(c.link);
+        if (src) fill(src);
+        media.appendChild(src ? el('img',{class:'gif',src,alt:`GIF ของ ${m.n}`,loading:'lazy',referrerpolicy:'no-referrer',onerror:e=>{ media.classList.remove('fill'); e.target.replaceWith(btn()); }}) : btn());
+      }
+      else media.appendChild(el('img',{class:'big',src:av(m.k),alt:''}));
+      const myD = daisiesOf(m.k);
+      if (myD.length){
+        const best = Math.max(...myD.map(d=>bloom(cheersOf(d).length)));
+        const st = el('a',{class:'sticker daisy-st',href:'#board',title:`Oopsie Daisy ของ ${m.n} ${myD.length} ดอก · กดเพื่ออ่าน`,'aria-label':`อ่าน Oopsie Daisy ของ ${m.n}`,html:daisyFace(best,true),onclick:e=>{ e.preventDefault(); document.getElementById('daisy-'+myD[0].id)?.scrollIntoView({behavior:'smooth',block:'center'}); }});
+        if (myD.length>1) st.appendChild(el('span',{class:'dn',text:'×'+myD.length}));
+        t.appendChild(st);
+      }
+      const got = S.gifts.filter(x=>x.to===m.k);
+      if (got.length){
+        const kinds = []; [...got].reverse().forEach(x=>{ if(!kinds.includes(x.gift)) kinds.push(x.gift); });
+        kinds.slice(0,GIFT_SLOTS.length).forEach((g,i)=>{
+          const n = got.filter(x=>x.gift===g).length, slot=GIFT_SLOTS[i];
+          const st = el('button',{type:'button',class:'sticker gift-st'+(justSent===m.k && i===0?' pop':''),style:`${slot.s};--r:${slot.r}deg`,title:`${GIFTS.find(x=>x.e===g)?.t||'ของขวัญ'} ${n} ชิ้น · กดอ่านคำขอบคุณ`,'aria-label':`อ่านคำขอบคุณถึง ${m.n}`,onclick:()=>openNotes(m.k)},[document.createTextNode(g), n>1?el('span',{class:'n',text:'×'+n}):null]);
+          t.appendChild(st);
+        });
+        if (kinds.length>GIFT_SLOTS.length) t.appendChild(el('button',{type:'button',class:'sticker more-st',style:'bottom:46px;right:-10px;--r:-6deg',text:`+${kinds.length-GIFT_SLOTS.length}`,onclick:()=>openNotes(m.k)}));
+      }
+      if (c && (c.energy || c.mood)){
+        const b=el('div',{class:'badges'});
+        if (c.mood) b.appendChild(el('span',{class:'badge mood',text:c.mood,title:'ความรู้สึก'}));
+        if (c.energy) b.appendChild(el('span',{class:'badge',title:`พลัง ${c.energy}/5`},[el('span',{html:battery(c.energy,30)}),el('span',{text:LEVELS[c.energy].t})]));
+        media.appendChild(b);
+      }
+      t.appendChild(media);
+      t.appendChild(el('div',{class:'who'},[el('img',{class:'av face',src:av(m.k),alt:''}),el('div',{},[el('div',{class:'n',text:m.n}),m.r?el('div',{class:'r',text:m.r}):null])]));
+      const cap = c && (c.caption ?? c.say);
+      if (cap) t.appendChild(el('p',{class:'cap',text:cap}));
+      if (S.answers[m.k]) t.appendChild(el('div',{class:'bubble'},[el('b',{text:'💬 คำตอบประจำสัปดาห์'}),document.createTextNode(S.answers[m.k].text)]));
+      if (!c){
+        t.appendChild(el('span',{class:'note',text:'ยังไม่ได้ลง GIF'}));
+        if (canWrite!==false && (!me || me===m.k)) t.appendChild(el('button',{type:'button',class:'empty-cta',text: me===m.k ? 'ลง GIF ของฉัน' : `ฉันคือ ${m.n} · ลง GIF`,onclick:()=>openGif(m.k)}));
+      }
+      const foot=el('div',{class:'foot'});
+      if (c) foot.appendChild(reactBar(m.k));
+      const gc = giftCount(m.k);
+      const right = el('div',{style:'display:flex;gap:8px;align-items:center'});
+      if (canWrite!==false && m.k!==me){ const again = me && S.gifts.some(x=>x.to===m.k && x.from===me); right.appendChild(el('button',{type:'button',class:'giftbtn',text: again?'💐 ส่งอีก':'💐 ส่งให้','aria-label':`${again?'ส่งดอกไม้ให้อีกครั้ง':'ส่งดอกไม้ให้'} ${m.n}`,onclick:()=>openGift(m.k)})); }
+      if (c && canWrite!==false && me===m.k) right.appendChild(el('button',{type:'button',class:'edit',text:'แก้',onclick:()=>openGif(m.k)}));
+      foot.appendChild(right);
+      t.appendChild(foot);
+      g.appendChild(t);
+    });
+  }
+
+  function gifSrc(link){
+    try{
+      const u=new URL(link); if (!/^https?:$/.test(u.protocol)) return null;
+      const h=u.hostname.replace(/^www\./,'');
+      if (/\.(gif|webp|png|jpe?g)$/i.test(u.pathname)) return u.href;
+      if (h==='giphy.com' && /^\/(gifs|stickers)\//.test(u.pathname)){ const id=u.pathname.split('/')[2]?.split('-').pop(); return id ? `https://media.giphy.com/media/${id}/giphy.gif` : null; }
+      if (h==='tenor.com' && /^\/view\//.test(u.pathname)) return null;
+      return u.href;
+    }catch{ return null; }
+  }
+
+  function reactBar(k){
+    const box=el('div',{class:'reacts'});
+    const mine=S.reacts.find(r=>r.member===k && r.uid===uid);
+    REACTS.forEach(e=>{
+      const n=S.reacts.filter(r=>r.member===k && r.emoji===e).length;
+      box.appendChild(el('button',{type:'button',class:mine&&mine.emoji===e?'on':'','aria-label':`ตอบด้วย ${e}`,text:n?`${e} ${n}`:e,onclick:()=>toggleReact(k,e,mine)}));
+    });
+    return box;
+  }
+
+  const cheersOf = d => S.cheers.filter(c=> c.daisy ? c.daisy===d.id : (c.member===d.member && d.id===`${d.week}__${d.member}`));
+  const daisiesOf = k => S.daisies.filter(d=>d.member===k);
+
+  function renderDaisies(){
+    const box=$('daisies'); box.textContent='';
+    const list = S.daisies;
+    if (!list.length){ box.appendChild(el('div',{class:'daisy-empty',text: S.ready ? 'สวนยังว่างอยู่ เล่าเรื่องที่พลาดแล้วปลูกเดซี่ของตัวเองได้นะ ไม่มีใครว่า 🌱' : 'กำลังโหลด…'})); return; }
+    list.forEach(d=>{
+      const m=byKey[d.member];
+      const fans = cheersOf(d);
+      const mineOn = fans.some(c=>c.uid===uid);
+      const lv = bloom(fans.length);
+      const faces = el('div',{class:'faces',style:'display:flex'}, fans.slice(0,8).map(c=>byKey[c.from]?el('img',{class:'av',src:av(c.from),alt:nameOf(c.from),title:nameOf(c.from)}):null));
+      const plot = el('article',{class:'plot',id:'daisy-'+d.id,'data-plant':d.id},[
+        el('div',{class:'plant','aria-hidden':'true'},[
+          el('span',{class:'head',html:daisyFace(lv)}),
+          el('span',{class:'stem',style:`height:${24+Math.min(fans.length,6)*12}px`},[el('i',{class:'leaf l'}),el('i',{class:'leaf r'})])
+        ]),
+        el('div',{class:'daisy'},[
+          el('div',{class:'top',style:'flex-wrap:wrap'},[el('img',{class:'av',src:av(m.k),alt:''}),el('b',{text:m.n}),el('span',{class:'mood lv'+lv,text:BLOOM_T[lv]})]),
+          el('dl',{},[el('dt',{text:'มีอะไรที่ฉันอยากเล่า?'}),el('dd',{text:d.story||'–'}),el('dt',{text:'ครั้งหน้าอยากลองอะไร?'}),el('dd',{text:d.next||'–'})]),
+          el('div',{class:'cheer'},[
+            canWrite!==false && m.k!==me ? el('button',{type:'button',class:mineOn?'on':'',text:mineOn?'💧 รดน้ำแล้ว':'💧 รดน้ำให้กำลังใจ',onclick:()=>toggleCheer(d,mineOn)}) : null,
+            faces, el('span',{class:'note',text: fans.length ? `${fans.length} คนรดน้ำ` : ''}),
+            canWrite!==false && m.k===me ? el('button',{type:'button',class:'textlink',text:'แก้เดซี่',onclick:()=>openDaisy(d)}) : null
+          ])
+        ])
+      ]);
+      box.appendChild(plot);
+    });
+  }
+
+  // ---- hall of fame (leaderboard, podium, brag images)
+  const TITLES = {"💐":"เจ้าแห่งช่อดอกไม้","🧸":"สายกอดอุ่น","🎁":"แม่เหล็กของขวัญ","🏆":"แชมป์ตัวจริง","🌟":"ดาวค้างฟ้า","🎈":"ตัวชูใจทีม","🍰":"ฮีโร่สายหวาน","🧋":"บัดดี้ชานม"};
+  function leaderboard(){
+    const by={}; S.gifts.forEach(g=>{ if(byKey[g.to]) (by[g.to]=by[g.to]||[]).push(g); });
+    const list = Object.entries(by).map(([k,gs])=>{
+      const cnt={}; gs.forEach(g=>cnt[g.gift]=(cnt[g.gift]||0)+1);
+      const kinds=Object.entries(cnt).sort((a,b)=>b[1]-a[1]);
+      return {k, gs, n:gs.length, kinds, senders:new Set(gs.map(g=>g.from)).size, title:TITLES[kinds[0][0]]||'ขวัญใจทีม'};
+    }).sort((a,b)=>b.n-a.n || b.senders-a.senders || nameOf(a.k).localeCompare(nameOf(b.k)));
+    let prev=null, rank=0;
+    list.forEach((x,i)=>{ if(x.n!==prev){ rank=i+1; prev=x.n; } x.rank=rank; });
+    return list;
+  }
+  const emo = x => x.kinds.slice(0,3).map(([e,n])=>e+'×'+n).join(' ');
+  function renderHof(){
+    const box=$('hof'); box.textContent='';
+    const L=leaderboard();
+    $('hof-shot').hidden = !L.length;
+    if (!L.length){
+      box.appendChild(el('div',{class:'a-empty'},[el('span',{class:'big','aria-hidden':'true',text:'🏆'}),el('span',{text: S.ready ? 'แท่นยังว่างอยู่ กด “💐 ส่งให้” ที่การ์ดของเพื่อน แล้วดูใครจะได้ขึ้นแท่นสัปดาห์นี้' : 'กำลังโหลด…'})]));
+      return;
+    }
+    const pod=el('div',{class:'podium'});
+    [1,0,2].forEach(i=>{
+      const x=L[i], slot='top'+(i+1);
+      if (!x){
+        pod.appendChild(el('div',{class:`pd empty ${slot} m${i+1}`},[el('div',{class:'ring'},[el('span',{class:'q',text:'?'})]),el('span',{class:'ttl',text:'ที่ว่างรอคุณ'}),el('div',{class:'plinth',text:String(i+1)})]));
+        return;
+      }
+      const m=Math.min(x.rank,3);
+      pod.appendChild(el('div',{class:`pd ${slot} m${m}`},[
+        el('button',{type:'button',class:'hero','aria-label':`อันดับ ${x.rank} ${nameOf(x.k)} ได้ ${x.n} คำขอบคุณ · กดอ่าน`,onclick:()=>openNotes(x.k)},[
+          el('div',{class:'ring'},[x.rank===1?el('span',{class:'crownx','aria-hidden':'true',text:'👑'}):null, el('img',{src:av(x.k),alt:''})]),
+          el('span',{class:'nm',text:nameOf(x.k)}),
+          el('span',{class:'ttl',text: x.rank===1 ? 'MVP · '+x.title : x.title}),
+          el('span',{class:'sc',text:emo(x)})
+        ]),
+        el('button',{type:'button',class:'mini',text:'📸 การ์ดอวด','aria-label':`โหลดการ์ดอวดของ ${nameOf(x.k)}`,onclick:()=>shoot('card',x.k)}),
+        el('div',{class:'plinth','aria-hidden':'true',text:String(x.rank)})
+      ]));
+    });
+    box.appendChild(pod);
+    if (L.length>3){
+      const ol=el('ol',{class:'ladder','aria-label':'อันดับถัดไป'});
+      L.slice(3).forEach(x=>ol.appendChild(el('li',{},[
+        el('span',{class:'rk',text:'#'+x.rank}),
+        el('img',{class:'av',src:av(x.k),alt:''}),
+        el('button',{type:'button',class:'who2','aria-label':`อ่านคำขอบคุณถึง ${nameOf(x.k)}`,onclick:()=>openNotes(x.k)},[el('b',{text:nameOf(x.k)}),el('span',{text:`${x.title} · ${x.n} คำขอบคุณ`})]),
+        el('span',{class:'em',text:emo(x)}),
+        el('button',{type:'button',class:'mini',text:'📸','aria-label':`โหลดการ์ดอวดของ ${nameOf(x.k)}`,onclick:()=>shoot('card',x.k)})
+      ])));
+      box.appendChild(ol);
+    }
+  }
+
+  // canvas drawing
+  const FD='"Mali","IBM Plex Sans Thai",sans-serif', FB='"IBM Plex Sans Thai",sans-serif';
+  const MEDALS={1:['#fff3b0','#f5c22e','#c98a00'],2:['#ffffff','#c9d1dc','#8a95a5'],3:['#ffd9b8','#d98b4a','#9a5320']};
+  async function fontsReady(){ try{ await Promise.all(['700 60px Mali','600 30px Mali','500 28px "IBM Plex Sans Thai"','600 28px "IBM Plex Sans Thai"'].map(f=>document.fonts.load(f,'กขAa'))); }catch{} }
+  const loadImg = src => new Promise(res=>{ const i=new Image(); i.onload=()=>res(i); i.onerror=()=>res(null); i.src=src; });
+  const seeded = s => ()=>{ s=(s*16807)%2147483647; return s/2147483647; };
+  function rr(ctx,x,y,w,h,r){ ctx.beginPath(); if (ctx.roundRect) ctx.roundRect(x,y,w,h,r); else ctx.rect(x,y,w,h); }
+  function star4(ctx,x,y,r,c){ ctx.fillStyle=c; ctx.beginPath(); ctx.moveTo(x,y-r); ctx.quadraticCurveTo(x,y,x+r,y); ctx.quadraticCurveTo(x,y,x,y+r); ctx.quadraticCurveTo(x,y,x-r,y); ctx.quadraticCurveTo(x,y,x,y-r); ctx.fill(); }
+  function stage(ctx,W,H,cy){
+    const g=ctx.createRadialGradient(W/2,cy,40,W/2,cy,H*0.95); g.addColorStop(0,'#8a1f96'); g.addColorStop(.45,'#3a0d4a'); g.addColorStop(1,'#12081f');
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    ctx.save(); ctx.translate(W/2,cy);
+    for (let i=0;i<28;i++){ ctx.rotate(Math.PI*2/28); ctx.beginPath(); ctx.moveTo(0,0); ctx.lineTo(-70,-H*1.3); ctx.lineTo(70,-H*1.3); ctx.closePath(); ctx.fillStyle=i%2?'rgba(255,215,110,.07)':'rgba(255,255,255,.025)'; ctx.fill(); }
+    ctx.restore();
+    const rnd=seeded(11);
+    for (let i=0;i<110;i++){ ctx.fillStyle=`rgba(255,240,200,${.25+rnd()*.6})`; ctx.beginPath(); ctx.arc(rnd()*W,rnd()*H,rnd()*2.2+.4,0,7); ctx.fill(); }
+    for (let i=0;i<14;i++) star4(ctx,rnd()*W,rnd()*H,6+rnd()*12,'rgba(255,226,122,.85)');
+    // confetti
+    const cols=['#ffd34d','#ff7ab8','#7ad7ff','#9bf08a','#ffffff'];
+    for (let i=0;i<46;i++){ ctx.save(); ctx.translate(rnd()*W,rnd()*H*0.55); ctx.rotate(rnd()*Math.PI); ctx.fillStyle=cols[i%cols.length]; ctx.globalAlpha=.75; ctx.fillRect(-7,-3,14,6); ctx.restore(); }
+  }
+  function goldText(ctx,txt,x,y,size,maxW){
+    ctx.save(); ctx.font=`700 ${size}px ${FD}`;
+    while (maxW && size>30 && ctx.measureText(txt).width>maxW){ size-=4; ctx.font=`700 ${size}px ${FD}`; }
+    ctx.textAlign='center'; ctx.textBaseline='alphabetic';
+    ctx.fillStyle='#7a3d00'; ctx.fillText(txt,x,y+Math.round(size*0.07));
+    const g=ctx.createLinearGradient(0,y-size*0.85,0,y); g.addColorStop(0,'#fff6c8'); g.addColorStop(.5,'#ffd34d'); g.addColorStop(1,'#e09a10');
+    ctx.shadowColor='rgba(255,190,40,.55)'; ctx.shadowBlur=34; ctx.fillStyle=g; ctx.fillText(txt,x,y); ctx.restore();
+  }
+  function medalGrad(ctx,r,x0,y0,x1,y1){ const m=MEDALS[Math.min(r,3)]; const g=ctx.createLinearGradient(x0,y0,x1,y1); g.addColorStop(0,m[0]); g.addColorStop(.5,m[1]); g.addColorStop(1,m[2]); return g; }
+  function avatar(ctx,img,k,x,y,rad,rank){
+    ctx.save(); ctx.shadowColor= rank===1?'rgba(255,200,40,.85)':'rgba(255,255,255,.35)'; ctx.shadowBlur=rad*.7;
+    ctx.fillStyle = rank && rank<=3 ? medalGrad(ctx,rank,x-rad,y-rad,x+rad,y+rad) : '#ffffff';
+    ctx.beginPath(); ctx.arc(x,y,rad*1.1,0,7); ctx.fill(); ctx.restore();
+    ctx.save(); ctx.beginPath(); ctx.arc(x,y,rad,0,7); ctx.clip(); ctx.fillStyle='#2a1c38'; ctx.fillRect(x-rad,y-rad,rad*2,rad*2);
+    if (img){ const s=Math.max(rad*2/img.width,rad*2/img.height), w=img.width*s, h=img.height*s; ctx.drawImage(img,x-w/2,y-h/2,w,h); }
+    else { ctx.fillStyle='#fff'; ctx.font=`700 ${rad}px ${FD}`; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(Array.from(nameOf(k))[0].toUpperCase(),x,y); }
+    ctx.restore();
+  }
+  function fit(ctx,txt,maxW){ if (ctx.measureText(txt).width<=maxW) return txt; const a=Array.from(txt); while(a.length>1 && ctx.measureText(a.join('')+'…').width>maxW) a.pop(); return a.join('')+'…'; }
+  function wrapLines(ctx,txt,maxW,maxLines){
+    let parts; try{ parts=[...new Intl.Segmenter('th',{granularity:'word'}).segment(txt)].map(s=>s.segment); }catch{ parts=Array.from(txt); }
+    const lines=[]; let cur='';
+    for (const p of parts){
+      if (ctx.measureText(cur+p).width<=maxW){ cur+=p; continue; }
+      if (cur) lines.push(cur);
+      cur=p.trimStart();
+      while (ctx.measureText(cur).width>maxW){ const a=Array.from(cur); let i=a.length; while(i>1 && ctx.measureText(a.slice(0,i).join('')).width>maxW) i--; lines.push(a.slice(0,i).join('')); cur=a.slice(i).join(''); }
+    }
+    if (cur) lines.push(cur);
+    if (lines.length>maxLines){ const keep=lines.slice(0,maxLines); const a=Array.from(keep[maxLines-1]); while(a.length && ctx.measureText(a.join('')+'…').width>maxW) a.pop(); keep[maxLines-1]=a.join('')+'…'; return keep; }
+    return lines;
+  }
+  function pill(ctx,txt,x,y,font,bg,fg,padX,h){ ctx.font=font; const w=ctx.measureText(txt).width+padX*2; rr(ctx,x-w/2,y-h/2,w,h,h/2); ctx.fillStyle=bg; ctx.fill(); ctx.fillStyle=fg; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(txt,x,y+1); }
+  function text(ctx,t,x,y,font,color,align='center'){ ctx.font=font; ctx.fillStyle=color; ctx.textAlign=align; ctx.textBaseline='alphabetic'; ctx.fillText(t,x,y); }
+
+  async function drawPoster(L){
+    const W=1080,H=1350, c=document.createElement('canvas'); c.width=W; c.height=H; const ctx=c.getContext('2d');
+    stage(ctx,W,H,560);
+    text(ctx,'PEA Maintain-D · Weekly Retro',W/2,86,`600 30px ${FB}`,'#f3e3fb');
+    goldText(ctx,'HALL OF FAME',W/2,196,118,W-100);
+    pill(ctx,'สัปดาห์ '+label(mon),W/2,246,`600 28px ${FB}`,'rgba(255,255,255,.14)','#ffffff',26,50);
+    const imgs = await Promise.all(L.slice(0,9).map(x=>loadImg(av(x.k))));
+    const base=1040, pw=290;
+    [{i:1,x:W/2-330,top:860,rad:92},{i:0,x:W/2,top:770,rad:122},{i:2,x:W/2+330,top:930,rad:82}].forEach(s=>{
+      const x=L[s.i], r=x?Math.min(x.rank,3):s.i+1;
+      ctx.save(); ctx.globalAlpha = x?1:.35;
+      rr(ctx,s.x-pw/2,s.top,pw,base-s.top,18); ctx.fillStyle=medalGrad(ctx,r,s.x-pw/2,s.top,s.x+pw/2,base); ctx.fill();
+      ctx.fillStyle='rgba(0,0,0,.18)'; ctx.fillRect(s.x-pw/2,base-16,pw,16);
+      ctx.fillStyle='rgba(255,255,255,.4)'; ctx.fillRect(s.x-pw/2+14,s.top+8,pw-28,6);
+      ctx.font=`700 ${s.i===0?112:86}px ${FD}`; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillStyle='rgba(60,30,0,.38)';
+      ctx.fillText(String(x?x.rank:s.i+1),s.x,(s.top+base)/2+8);
+      ctx.restore();
+      if (!x){ text(ctx,'ที่ว่างรอคุณ',s.x,s.top-40,`600 28px ${FB}`,'rgba(255,255,255,.5)'); return; }
+      const nameY=s.top-112, cy=nameY-50-s.rad;
+      avatar(ctx,imgs[s.i],x.k,s.x,cy,s.rad,x.rank);
+      if (x.rank===1){ ctx.save(); ctx.translate(s.x,cy-s.rad-34); ctx.rotate(-.14); ctx.font=`86px ${FB}`; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('👑',0,0); ctx.restore(); }
+      ctx.save(); ctx.shadowColor='rgba(0,0,0,.45)'; ctx.shadowBlur=12; ctx.font=`700 ${s.i===0?52:42}px ${FD}`; text(ctx,fit(ctx,nameOf(x.k),300),s.x,nameY,ctx.font,'#ffffff'); ctx.restore();
+      const t = x.rank===1 ? 'MVP · '+x.title : x.title;
+      ctx.font=`600 24px ${FB}`; pill(ctx,fit(ctx,t,270),s.x,s.top-66,`600 24px ${FB}`, x.rank===1?'#ffd34d':'rgba(255,255,255,.16)', x.rank===1?'#3d2400':'#ffffff',16,40);
+      text(ctx,fit(ctx,emo(x),290),s.x,s.top-16,`600 28px ${FB}`,'#ffe9a8');
+    });
+    const rest=L.slice(3,9);
+    if (rest.length){
+      rest.forEach((x,j)=>{
+        const col=j%2, row=Math.floor(j/2), bx=60+col*490, by=1072+row*72, bw=470, bh=60;
+        rr(ctx,bx,by,bw,bh,14); ctx.fillStyle='rgba(255,255,255,.09)'; ctx.fill();
+        text(ctx,'#'+x.rank,bx+34,by+40,`700 28px ${FD}`,'#ffd34d');
+        avatar(ctx,imgs[3+j],x.k,bx+92,by+30,22,0);
+        ctx.font=`600 26px ${FB}`; text(ctx,fit(ctx,nameOf(x.k),200),bx+128,by+40,ctx.font,'#ffffff','left');
+        text(ctx,fit(ctx,emo(x),130),bx+bw-18,by+40,`500 24px ${FB}`,'#ffe9a8','right');
+      });
+    } else {
+      text(ctx,'ขอบคุณทุกคนที่ทำให้สัปดาห์นี้ดีขึ้น 💜',W/2,1140,`600 34px ${FD}`,'#ffffff');
+    }
+    const senders=new Set(S.gifts.filter(g=>byKey[g.to]).map(g=>g.from)).size;
+    text(ctx,`ของขวัญทั้งหมด ${S.gifts.filter(g=>byKey[g.to]).length} ชิ้น จาก ${senders} คน`,W/2,1306,`500 26px ${FB}`,'#eadbf4');
+    return c;
+  }
+
+  async function drawCard(x){
+    const W=1080,H=1350, c=document.createElement('canvas'); c.width=W; c.height=H; const ctx=c.getContext('2d');
+    stage(ctx,W,H,500);
+    text(ctx,'PEA Maintain-D · Weekly Retro',W/2,86,`600 30px ${FB}`,'#f3e3fb');
+    goldText(ctx, x.rank===1 ? 'MVP ประจำสัปดาห์' : `อันดับ ${x.rank} ของสัปดาห์`, W/2,196,92,W-120);
+    pill(ctx,'สัปดาห์ '+label(mon),W/2,250,`600 28px ${FB}`,'rgba(255,255,255,.14)','#ffffff',26,50);
+    const img=await loadImg(av(x.k));
+    avatar(ctx,img,x.k,W/2,490,160,x.rank<=3?x.rank:0);
+    if (x.rank===1){ ctx.save(); ctx.translate(W/2,300); ctx.rotate(-.14); ctx.font=`110px ${FB}`; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText('👑',0,0); ctx.restore(); }
+    else if (x.rank<=3){ ctx.save(); ctx.font=`96px ${FB}`; ctx.textAlign='center'; ctx.textBaseline='middle'; ctx.fillText(x.rank===2?'🥈':'🥉',W/2+150,620); ctx.restore(); }
+    ctx.save(); ctx.shadowColor='rgba(0,0,0,.5)'; ctx.shadowBlur=16; ctx.font=`700 80px ${FD}`; text(ctx,fit(ctx,nameOf(x.k),W-140),W/2,745,ctx.font,'#ffffff'); ctx.restore();
+    ctx.font=`700 32px ${FB}`; pill(ctx,fit(ctx,'🏅 '+x.title,W-200),W/2,808,`700 32px ${FB}`,'#ffd34d','#3d2400',26,58);
+    text(ctx,fit(ctx,x.kinds.map(([e,n])=>e+'×'+n).join('   '),W-140),W/2,895,`600 46px ${FB}`,'#ffe9a8');
+    text(ctx,`${x.n} คำขอบคุณ จาก ${x.senders} คน`,W/2,948,`500 30px ${FB}`,'#eadbf4');
+    // thank-you notes
+    const bx=90, bw=W-180, top=985, bottom=1262;
+    rr(ctx,bx,top,bw,bottom-top,24); ctx.fillStyle='rgba(255,255,255,.09)'; ctx.fill();
+    let y=top+52;
+    for (const g of [...x.gs].reverse()){
+      ctx.font=`500 30px ${FB}`;
+      const lines=wrapLines(ctx,'“'+(g.note||'')+'”',bw-80,2);
+      const need=lines.length*40+36;
+      if (y+need-30>bottom) break;
+      lines.forEach(l=>{ text(ctx,l,bx+40,y,`500 30px ${FB}`,'#ffffff','left'); y+=40; });
+      text(ctx,`${g.gift} จาก ${nameOf(g.from)}`,bx+40,y,`600 24px ${FB}`,'#ffe9a8','left'); y+=52;
+    }
+    text(ctx,'Hall of Fame · ขอบคุณที่ทำให้ทีมดีขึ้น 💜',W/2,1312,`500 26px ${FB}`,'#eadbf4');
+    return c;
+  }
+
+  let shotBlob=null, shotName='', shotUrl='', shotSeq=0;
+  async function shoot(kind,k){
+    const seq=++shotSeq;
+    const L=leaderboard(); if (!L.length) return;
+    const x = kind==='card' ? L.find(i=>i.k===k) : null;
+    if (kind==='card' && !x) return;
+    shotBlob=null; if (shotUrl){ URL.revokeObjectURL(shotUrl); shotUrl=''; }
+    $('shot-img').hidden=true; $('shot-wait').hidden=false; $('shot-save').disabled=true; setErr('shot-err','');
+    $('shot-tip').hidden = !!downloads; $('shot-save').hidden = !downloads;
+    $('dshot-t').textContent = x ? `📸 การ์ดอวดของ ${nameOf(x.k)}` : '📸 Hall of Fame สัปดาห์นี้';
+    openDlg($('dshot'));
+    try{
+      await fontsReady();
+      const c = x ? await drawCard(x) : await drawPoster(L);
+      const blob = await new Promise((res,rej)=>c.toBlob(b=>b?res(b):rej(new Error('blob')),'image/png'));
+      if (seq!==shotSeq) return;
+      shotBlob=blob; shotName = x ? `hall-of-fame-${W()}-${x.k}.png` : `hall-of-fame-${W()}.png`;
+      shotUrl=URL.createObjectURL(blob);
+      const im=$('shot-img'); im.src=shotUrl; im.alt = x ? `การ์ดอวดของ ${nameOf(x.k)}` : 'ภาพ Hall of Fame สัปดาห์นี้';
+      im.hidden=false; $('shot-wait').hidden=true; $('shot-save').disabled=false;
+      if (downloads) $('shot-save').focus();
+    }catch{ if (seq===shotSeq){ $('shot-wait').hidden=true; setErr('shot-err','วาดรูปไม่สำเร็จ ลองใหม่อีกครั้ง'); } }
+  }
+  $('hof-shot').addEventListener('click',()=>shoot('poster'));
+  $('shot-save').addEventListener('click', async ()=>{
+    if (!shotBlob || !downloads) return;
+    const btn=$('shot-save'); btn.disabled=true; setErr('shot-err','');
+    try{ await downloads.save({filename:shotName,data:shotBlob}); closeDlg($('dshot')); toast('บันทึกรูปแล้ว ไปอวดได้เลย 🏆'); }
+    catch(err){
+      const c=err&&err.code;
+      if (c==='declined') {}
+      else if (c==='rate_limited') setErr('shot-err','มีหน้าต่างบันทึกเปิดอยู่ รอสักครู่แล้วลองอีกครั้ง');
+      else { $('shot-tip').hidden=false; btn.hidden=true; }
+    }
+    finally{ btn.disabled=false; }
+  });
+
+  // ---- data
+  function subscribe(){
+    unsubs.splice(0).forEach(u=>{try{u()}catch{}});
+    Object.assign(S,{checkins:{},reacts:[],question:null,answers:{},daisies:[], cheers:[],gifts:[],ready:false});
+    renderAll();
+    if (!db){ S.ready=true; renderAll(); return; }
+    const w=W(); let pending=5;
+    const done=()=>{ if(--pending===0){ S.ready=true; } renderAll(); maybePopup(); };
+    const onErr=()=>{ showBanner('โหลดข้อมูลไม่ได้ ลองรีเฟรชหน้า'); };
+    const q = name => db.collection(name).where('week','==',w);
+    const once = fn => { let first=true; return s=>{ fn(s); if(first){ first=false; done(); } else { renderAll(); maybePopup(); } }; };
+    const dict = s => { const o={}; s.docs.forEach(d=>{ const v=d.data(); if(v&&byKey[v.member]) o[v.member]=v; }); return o; };
+    unsubs.push(q('checkins').onSnapshot(once(s=>S.checkins=dict(s)),onErr));
+    unsubs.push(q('answers').onSnapshot(once(s=>S.answers=dict(s)),onErr));
+    unsubs.push(q('daisies').onSnapshot(once(s=>S.daisies=s.docs.map(d=>{ const v=d.data(); return v&&byKey[v.member] ? {...v, id: v.id||d.id||`${w}__${v.member}`} : null; }).filter(Boolean).sort((a,b)=>(a.createdAt||a.updatedAt||'').localeCompare(b.createdAt||b.updatedAt||''))),onErr));
+    unsubs.push(q('gifts').onSnapshot(once(s=>S.gifts=s.docs.map(d=>{ const v=d.data(); return v?{...v,_id:d.id}:null; }).filter(Boolean).sort((a,b)=>(a.createdAt||'').localeCompare(b.createdAt||''))),onErr));
+    unsubs.push(db.doc('questions/'+w).onSnapshot(once(s=>S.question=s.exists?s.data():null),onErr));
+    unsubs.push(q('reacts').onSnapshot(s=>{ S.reacts=s.docs.map(d=>d.data()).filter(Boolean); renderAll(); },()=>{}));
+    unsubs.push(q('cheers').onSnapshot(s=>{ S.cheers=s.docs.map(d=>d.data()).filter(Boolean); renderAll(); },()=>{}));
+  }
+
+  function needDb(){ if (!db){ showBanner('เชื่อมต่อที่เก็บข้อมูลไม่ได้ ลองรีเฟรชหน้า'); return false; } return true; }
+  function writeErr(err){ const c=err&&err.code; return c==='invalid_argument'?'บันทึกไม่ได้ ลองรีเฟรชหน้าแล้วลองใหม่':'บันทึกไม่สำเร็จ ลองใหม่อีกครั้ง'; }
+
+  async function saveQuestion(text, asker){
+    text=(text||'').trim(); if (!text){ $('q-input')?.focus(); return; }
+    if (!needDb()) return;
+    try{ await db.doc('questions/'+W()).set({week:W(),asker,text,setBy:me||null,uid,updatedAt:new Date().toISOString()}); toast('ตั้งคำถามแล้ว'); }
+    catch(e){ showBanner(writeErr(e)); }
+  }
+
+  async function toggleReact(k,e,mine){
+    if (!needDb() || !uid) return;
+    const ref=db.doc(`reacts/${W()}__${k}__${uid}`);
+    try { if (mine && mine.emoji===e) await ref.delete(); else await ref.set({week:W(),member:k,uid,emoji:e}); } catch(err){ showBanner(writeErr(err)); }
+  }
+  async function toggleCheer(d,on){
+    if (!needDb() || !uid) return;
+    if (!me){ askMe(); return; }
+    const k=d.member, legacy = d.id===`${d.week}__${d.member}`;
+    const mine = cheersOf(d).find(c=>c.uid===uid);
+    const ref=db.doc(mine && !mine.daisy ? `cheers/${W()}__${k}__${uid}` : `cheers/${W()}__${d.id}__${uid}`);
+    try{ if (on) await ref.delete(); else { await ref.set({week:W(),member:k,daisy:legacy?null:d.id,from:me,uid,at:new Date().toISOString()}); water(d.id); toast(`รดน้ำให้เดซี่ของ ${nameOf(k)} แล้ว 💧`); } } catch(err){ showBanner(writeErr(err)); }
+  }
+  function water(k){
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    setTimeout(()=>{
+      const h=document.querySelector(`[data-plant="${k}"] .head`); if(!h) return;
+      const r=h.getBoundingClientRect();
+      for (let i=0;i<7;i++){
+        const d=el('span',{class:'rain',text:'💧','aria-hidden':'true'});
+        d.style.left=(r.left+r.width/2-10+(Math.random()*56-28))+'px'; d.style.top=(r.top-10)+'px'; d.style.animationDelay=(i*80)+'ms';
+        document.body.appendChild(d); setTimeout(()=>d.remove(),1100+i*80);
+      }
+      setTimeout(()=>{ const h2=document.querySelector(`[data-plant="${k}"] .head`); if(!h2) return; h2.classList.add('boing'); setTimeout(()=>h2.classList.remove('boing'),750); },650);
+    },60);
+  }
+  function askMe(){ showBanner('เลือก “ฉันคือ” ด้านบนก่อนนะ'); $('me-select').focus(); }
+
+  // ---- question popup
+  function openQuestionPopup(editing){
+    if (!S.question || !S.question.text) return;
+    const asker=S.question.asker||askerOf(mon);
+    $('dq-av').src=av(asker); $('dq-k').textContent=`❓ คำถามจาก ${nameOf(asker)} · ${label(mon)}`; $('dq-t').textContent=S.question.text;
+    $('dq-mefield').hidden=!!me; fillMemberSelect($('dq-me'), me, 'เลือกชื่อของฉัน');
+    $('dq-a').value = (me && S.answers[me]?.text) || '';
+    $('dq-send').textContent = editing ? 'บันทึกคำตอบ' : 'ส่งคำตอบแล้วเข้าบอร์ด';
+    $('dq-later').hidden = !!editing;
+    setErr('dq-err','');
+    openDlg($('dq'));
+    $('dq-a').focus();
+  }
+  function maybePopup(){
+    if (!S.ready || !isNow() || canWrite===false) return;
+    if (!S.question || !S.question.text) return;
+    if (me && S.answers[me]) return;
+    if (store.get(skipKey())) return;
+    if (popupShownFor===W()+'|'+me) return;
+    if (document.querySelector('dialog[open]')) return;
+    popupShownFor=W()+'|'+me;
+    openQuestionPopup(false);
+  }
+  function skipPopup(){
+    store.set(skipKey(),'1');
+    closeDlg($('dq'));
+    renderAll();
+    if (me) $('answer-now').focus();
+  }
+  $('dq-later').addEventListener('click',skipPopup);
+  $('dq').addEventListener('cancel',e=>{ e.preventDefault(); if ($('dq-later').hidden) closeDlg($('dq')); else skipPopup(); });
+  $('fq').addEventListener('submit', async e=>{
+    e.preventDefault();
+    const who = me || $('dq-me').value;
+    const text = $('dq-a').value.trim();
+    if (!who){ setErr('dq-err','เลือกชื่อของคุณก่อนนะ'); $('dq-me').focus(); return; }
+    if (!text){ setErr('dq-err','พิมพ์คำตอบก่อนนะ หรือกด “ขอตอบทีหลัง”'); $('dq-a').focus(); return; }
+    if (!needDb()) return;
+    const btn=$('dq-send'); btn.disabled=true;
+    try{
+      await db.doc(`answers/${W()}__${who}`).set({week:W(),member:who,text,uid,updatedAt:new Date().toISOString()});
+      if (!me) setMe(who);
+      closeDlg($('dq')); toast('ส่งคำตอบแล้ว ยินดีต้อนรับเข้าบอร์ด 🎉');
+    }catch(err){ setErr('dq-err',writeErr(err)); }
+    finally{ btn.disabled=false; }
+  });
+  $('answer-now').addEventListener('click',()=>openQuestionPopup(false));
+
+  // ---- gif dialog
+  for (let L=5; L>=1; L--){ const id='lv-'+L; $('levels').append(el('input',{type:'radio',name:'energy',id,value:String(L)}), el('label',{for:id},[el('span',{html:battery(L,48)}),el('span',{text:LEVELS[L].t})])); }
+  MOODS.forEach((m,i)=>{ const id='md-'+i; $('moods').append(el('input',{type:'radio',name:'mood',id,value:m}), el('label',{for:id,text:m})); });
+  // click a checked radio again to clear it (both optional)
+  ['levels','moods'].forEach(gid=>{
+    $(gid).addEventListener('pointerdown',e=>{ const lab=e.target.closest('label'); if(!lab) return; const inp=$(lab.htmlFor); lab.dataset.was = inp.checked ? '1':''; });
+    $(gid).addEventListener('click',e=>{ const lab=e.target.closest('label'); if(!lab) return; const inp=$(lab.htmlFor); if (lab.dataset.was==='1'){ e.preventDefault(); inp.checked=false; lab.dataset.was=''; } });
+  });
+  function setPreview(src){
+    const p=$('preview'), has=!!src;
+    if (has) p.src=src; else p.removeAttribute('src');
+    p.hidden=!has; $('pick').hidden=has; $('swap').hidden=!has; $('dropico').hidden=has; $('dropmsg').hidden=has;
+  }
+  function takeFile(f, pasted){
+    if (!f) return;
+    $('dg-still').hidden = !(pasted && f.type!=='image/gif' && f.type!=='image/webp');
+    if (!/^image\/(gif|webp|png|jpeg)$/.test(f.type)) { setErr('dg-err','รองรับเฉพาะไฟล์ GIF, WebP, PNG หรือ JPG'); return; }
+    if (f.size>20*1024*1024) { setErr('dg-err','ไฟล์ใหญ่เกิน 20 MB ลองเลือก GIF ขนาดเล็กลง'); return; }
+    setErr('dg-err',''); pendingFile=f; setPreview(URL.createObjectURL(f));
+  }
+  function fillGif(k){
+    const c=S.checkins[k]; editingGif=c||null; pendingFile=null; setErr('dg-err',''); $('dg-still').hidden=true;
+    document.querySelectorAll('input[name=energy]').forEach(r=>r.checked = !!c && Number(r.value)===c.energy);
+    document.querySelectorAll('input[name=mood]').forEach(r=>r.checked = !!c && r.value===c.mood);
+    $('dg-cap').value=(c && (c.caption ?? c.say))||''; $('dg-capc').textContent=`${$('dg-cap').value.length}/100`;
+    $('dg-link').value=c?.link||''; $('linkbox').open=!!c?.link || !assets;
+    setPreview(c?.gif ? blobUrl(c.gif) : null);
+    $('drop').hidden=!assets; $('drophelp').hidden=!assets;
+  }
+  function openGif(k){
+    const who = k || me;
+    fillMemberSelect($('dg-me'), who, 'เลือกชื่อของฉัน');
+    fillGif(who);
+    $('dg-t').textContent='ลง GIF · '+label(mon);
+    openDlg($('dg'));
+  }
+  $('dg-me').addEventListener('change',e=>fillGif(e.target.value));
+  $('dg-cap').addEventListener('input',e=>$('dg-capc').textContent=`${e.target.value.length}/100`);
+  $('pick').addEventListener('click',()=>$('dg-file').click());
+  $('swap').addEventListener('click',()=>$('dg-file').click());
+  $('dg-file').addEventListener('change',e=>{ takeFile(e.target.files[0]); e.target.value=''; });
+  const drop=$('drop');
+  ['dragenter','dragover'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add('over');}));
+  ['dragleave','drop'].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove('over');}));
+  drop.addEventListener('drop',e=>takeFile(e.dataTransfer.files[0]));
+  $('dg').addEventListener('paste',e=>{ const f=[...(e.clipboardData?.files||[])][0]; if(f){ e.preventDefault(); takeFile(f,true);} });
+  $('open-gif').addEventListener('click',()=>openGif());
+  $('fg').addEventListener('submit', async e=>{
+    e.preventDefault();
+    const k=$('dg-me').value;
+    if (!k){ setErr('dg-err','เลือกชื่อของคุณก่อนนะ'); $('dg-me').focus(); return; }
+    const energy=Number((document.querySelector('input[name=energy]:checked')||{}).value||0)||null;
+    const mood=(document.querySelector('input[name=mood]:checked')||{}).value||null;
+    const caption=$('dg-cap').value.trim(), link=$('dg-link').value.trim();
+    if (!pendingFile && !editingGif?.gif && !link){ setErr('dg-err','แปะ GIF ก่อนนะ (ไฟล์หรือลิงก์ก็ได้)'); return; }
+    if (link && !/^https:\/\//i.test(link)){ setErr('dg-err','ลิงก์ต้องขึ้นต้นด้วย https://'); return; }
+    if (!needDb()) return;
+    const btn=$('dg-save'); btn.disabled=true; btn.textContent='กำลังบันทึก…';
+    try{
+      let gif = editingGif?.gif || null;
+      if (pendingFile){ if (!assets) throw {code:'no_assets'}; gif=(await assets.upload(pendingFile)).id; }
+      await db.doc(`checkins/${W()}__${k}`).set({week:W(),member:k,gif,link:link||null,caption,energy,mood,uid,updatedAt:new Date().toISOString()});
+      if (!me) setMe(k);
+      closeDlg($('dg')); toast('ลงบอร์ดแล้ว');
+    }catch(err){
+      const c=err&&err.code;
+      setErr('dg-err', c==='too_large'?'ไฟล์ใหญ่เกินไป ลองเลือก GIF ขนาดเล็กลง' : c==='no_assets'||c==='not_granted'?'อัปโหลดไฟล์ไม่สำเร็จ ลองใหม่ หรือใช้ลิงก์แทน' : writeErr(err));
+    }finally{ btn.disabled=false; btn.textContent='ลงบอร์ด'; }
+  });
+
+  // ---- daisy dialog
+  let editingDaisy=null;
+  function openDaisy(d){
+    editingDaisy=d||null;
+    fillMemberSelect($('dd-me'), d?d.member:me, 'เลือกชื่อของฉัน'); $('dd-me').disabled=!!d;
+    $('dd-t').textContent = d ? '🌼 แก้เดซี่' : (me && daisiesOf(me).length ? '🌱 ปลูกเดซี่อีกดอก' : '🌱 ปลูกเดซี่ของฉัน');
+    $('dd-story').value=d?.story||''; $('dd-next').value=d?.next||''; $('dd-remove').hidden=!d; $('dd-save').textContent=d?'บันทึก':'ปลูกเดซี่'; setErr('dd-err','');
+    openDlg($('dd')); $(d||me?'dd-story':'dd-me').focus();
+  }
+  $('open-daisy').addEventListener('click',()=>openDaisy());
+  $('fd').addEventListener('submit', async e=>{
+    e.preventDefault();
+    const k=$('dd-me').value, story=$('dd-story').value.trim(), next=$('dd-next').value.trim();
+    if (!k){ setErr('dd-err','เลือกชื่อของคุณก่อนนะ'); return; }
+    if (!story && !next){ setErr('dd-err','เล่าอย่างน้อยหนึ่งข้อนะ'); $('dd-story').focus(); return; }
+    if (!needDb()) return;
+    const now=new Date().toISOString(), d=editingDaisy;
+    const id = d ? d.id : `${W()}__${k}__${Date.now().toString(36)}${Math.random().toString(36).slice(2,6)}`;
+    try{ await db.doc('daisies/'+id).set({week:W(),member:k,id,story,next,uid,createdAt:d?.createdAt||d?.updatedAt||now,updatedAt:now}); if(!me) setMe(k); closeDlg($('dd')); toast(d?'แก้เดซี่แล้ว':'ปลูกเดซี่ในสวนแล้ว 🌱'); }
+    catch(err){ setErr('dd-err',writeErr(err)); }
+  });
+  $('dd-remove').addEventListener('click', async ()=>{
+    const d=editingDaisy; if(!d||!needDb()) return;
+    try{ await db.doc('daisies/'+d.id).delete(); closeDlg($('dd')); toast('เอาเดซี่ออกแล้ว'); }catch(err){ setErr('dd-err',writeErr(err)); }
+  });
+
+  // ---- proud pal
+  GIFTS.forEach((g,i)=>{ const id='gf-'+i; $('gifts').append(el('input',{type:'radio',name:'gift',id,value:g.e,checked:i===0}), el('label',{for:id},[el('span',{class:'e',text:g.e}),el('span',{text:g.t})])); });
+  $('dp-note').addEventListener('input',e=>$('dp-notec').textContent=`${e.target.value.length}/100`);
+  let editingGift=null;
+  function openGift(k, g){
+    giftTo=k; editingGift=g||null;
+    $('dp-t').textContent = g ? `✏️ แก้ของขวัญถึง ${nameOf(k)}` : `💐 ส่งให้ ${nameOf(k)}`;
+    $('dp-mefield').hidden=!!me || !!g; fillMemberSelect($('dp-me'), g ? g.from : me, 'เลือกชื่อของฉัน');
+    document.querySelectorAll('input[name=gift]').forEach((r,i)=>r.checked = g ? r.value===g.gift : i===0);
+    $('dp-note').value=g?.note||''; $('dp-notec').textContent=`${$('dp-note').value.length}/100`; setErr('dp-err','');
+    const sent = !g && me ? S.gifts.filter(x=>x.to===k && x.from===me).length : 0;
+    $('dp-again').hidden=!sent; $('dp-again').textContent=`สัปดาห์นี้ส่งให้ ${nameOf(k)} ไปแล้ว ${sent} ครั้ง ส่งเพิ่มได้เรื่อย ๆ เลย`;
+    $('dp-send').textContent = g ? 'บันทึก' : 'ส่งเลย';
+    openDlg($('dp')); $('dp-note').focus();
+  }
+  async function deleteGift(g){
+    if (!g?._id || !needDb()) return;
+    if (!confirm(`ลบ ${g.gift} ที่ส่งให้ ${nameOf(g.to)} ใช่ไหม`)) return;
+    try{ await db.doc('gifts/'+g._id).delete(); closeDlg($('dn')); toast('ลบของขวัญแล้ว'); }catch(err){ showBanner(writeErr(err)); }
+  }
+  function burst(k, emoji){
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const t=document.querySelector(`.tile[data-member="${k}"]`); if(!t) return;
+    const r=t.getBoundingClientRect();
+    for (let i=0;i<9;i++){
+      const f=el('span',{class:'fly',text:i%3===0?'✨':emoji,'aria-hidden':'true'});
+      f.style.left=(r.left+r.width/2-14+(Math.random()*60-30))+'px'; f.style.top=(r.top+r.height*0.55)+'px';
+      f.style.setProperty('--dx',(Math.random()*160-80)+'px'); f.style.setProperty('--rot',(Math.random()*60-30)+'deg'); f.style.animationDelay=(i*70)+'ms';
+      document.body.appendChild(f); setTimeout(()=>f.remove(),1600+i*70);
+    }
+  }
+  $('fp').addEventListener('submit', async e=>{
+    e.preventDefault();
+    const from = editingGift ? editingGift.from : (me || $('dp-me').value);
+    const gift=(document.querySelector('input[name=gift]:checked')||{}).value||'💐';
+    const note=$('dp-note').value.trim();
+    if (!from){ setErr('dp-err','เลือกชื่อของคุณก่อนนะ'); $('dp-me').focus(); return; }
+    if (from===giftTo){ setErr('dp-err','ส่งให้ตัวเองไม่ได้นะ ลองแปะเดซี่แทน'); return; }
+    if (!note){ setErr('dp-err','เขียนคำขอบคุณสั้น ๆ ก่อนนะ'); $('dp-note').focus(); return; }
+    if (!needDb()) return;
+    const btn=$('dp-send'); btn.disabled=true;
+    try{
+      if (editingGift){
+        const g=editingGift;
+        await db.doc('gifts/'+g._id).set({week:g.week||W(),to:g.to,from:g.from,gift,note,uid:g.uid||uid,createdAt:g.createdAt||new Date().toISOString(),updatedAt:new Date().toISOString()});
+        editingGift=null; closeDlg($('dp')); toast('แก้ของขวัญแล้ว'); return;
+      }
+      await db.collection('gifts').add({week:W(),to:giftTo,from,gift,note,uid,createdAt:new Date().toISOString()});
+      if (!me) setMe(from);
+      const to=giftTo; justSent=to; setTimeout(()=>{ if(justSent===to) justSent=''; },1500);
+      closeDlg($('dp')); burst(to,gift); toast(`แปะ ${gift} ให้ ${nameOf(to)} แล้ว`);
+    }catch(err){ setErr('dp-err',writeErr(err)); }
+    finally{ btn.disabled=false; }
+  });
+  function openNotes(k){
+    $('dn-t').textContent=`💐 คำขอบคุณถึง ${nameOf(k)}`;
+    const list=$('dn-list'); list.textContent='';
+    S.gifts.filter(g=>g.to===k).forEach(g=>{
+      const mine = canWrite!==false && g._id && me && g.from===me;
+      list.appendChild(el('div',{class:'n1'},[el('span',{class:'g',text:g.gift}),el('img',{class:'av',src:av(g.from),alt:''}),el('div',{style:'flex:1;min-width:0'},[el('b',{text:'จาก '+nameOf(g.from)}),el('p',{text:g.note}),
+        mine ? el('div',{style:'display:flex;gap:10px;margin-top:4px'},[
+          el('button',{type:'button',class:'edit',text:'แก้',onclick:()=>{ closeDlg($('dn')); openGift(k,g); }}),
+          el('button',{type:'button',class:'edit',text:'ลบ',onclick:()=>deleteGift(g)})
+        ]) : null])]));
+    });
+    if (canWrite!==false && k!==me) list.appendChild(el('div',{class:'actions'},[el('button',{type:'button',class:'cta',text:'💐 ขอบคุณเพิ่ม',onclick:()=>{ closeDlg($('dn')); openGift(k); }})]));
+    openDlg($('dn'));
+  }
+
+  // ---- me + weeks
+  fillMemberSelect($('me-select'), me, 'เลือกชื่อ');
+  $('me-select').addEventListener('change',e=>setMe(e.target.value));
+  if (me){ $('me-img').src=av(me); $('me-img').hidden=false; }
+  $('prev').addEventListener('click',()=>{ mon=addDays(mon,-7); subscribe(); });
+  $('next').addEventListener('click',()=>{ if(mon>=thisMon) return; mon=addDays(mon,7); subscribe(); });
+
+  renderAll();
+  (async ()=>{
+    const c = window.claude;
+    if (!c || !c.use){ S.ready=true; showBanner('ยังไม่ได้ตั้งค่าที่เก็บข้อมูล (config.js) บอร์ดจึงยังบันทึกไม่ได้'); renderAll(); return; }
+    [db, user, assets, downloads] = await Promise.all([c.use('db'), c.use('user'), c.use('assets'), c.use('downloads')]);
+    if (!db){ S.ready=true; showBanner('เชื่อมต่อที่เก็บข้อมูลไม่ได้ ลองรีเฟรชหน้า'); renderAll(); return; }
+    if (user){ try{ uid = await user.id(); }catch{} try{ const w = await user.can('data.write'); canWrite = w===null?null:!!w; }catch{} }
+    if (canWrite===false) showBanner('บัญชีนี้ดูได้อย่างเดียว ขอสิทธิ์ Editor จากเจ้าของบอร์ดเพื่อร่วมเล่น');
+    else if (!assets) showBanner('บัญชีนี้อัปโหลดไฟล์ GIF ไม่ได้ (ต้องเป็น Editor) แต่ยังลงลิงก์ GIF และเล่นส่วนอื่นได้ครบ');
+    subscribe();
+  })();
+})();
+</script>
+
+</body></html>
