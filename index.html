@@ -404,7 +404,7 @@ details.link[open] summary{margin-bottom:8px}
         <button type="button" class="swap" id="swap" hidden>เปลี่ยน GIF</button>
         <input type="file" id="dg-file" accept="image/gif,image/webp,image/png,image/jpeg" hidden>
       </div>
-      <p class="note" id="drophelp">ให้ GIF ขยับได้: บน GIPHY คลิกขวาที่ GIF เลือก “Save image as…” (บันทึกเป็น .gif) แล้วลากไฟล์มาวางตรงนี้ · ไม่เกิน 20 MB</p>
+      <p class="note" id="drophelp">ให้ GIF ขยับได้: บน GIPHY คลิกขวาที่ GIF เลือก “Save image as…” (บันทึกเป็น .gif) แล้วลากไฟล์มาวางตรงนี้ · ไม่เกิน 5 MB</p>
       <p class="err" id="dg-still" hidden>รูปที่ copy มาจะเป็นภาพนิ่ง ไม่ขยับ อยากให้ขยับให้บันทึกไฟล์ .gif แล้วลากมาวางแทน</p>
       <details class="link" id="linkbox">
         <summary>ไม่มีไฟล์? ใช้ลิงก์ GIF แทน</summary>
@@ -1179,7 +1179,7 @@ details.link[open] summary{margin-bottom:8px}
     if (!f) return;
     $('dg-still').hidden = !(pasted && f.type!=='image/gif' && f.type!=='image/webp');
     if (!/^image\/(gif|webp|png|jpeg)$/.test(f.type)) { setErr('dg-err','รองรับเฉพาะไฟล์ GIF, WebP, PNG หรือ JPG'); return; }
-    if (f.size>20*1024*1024) { setErr('dg-err','ไฟล์ใหญ่เกิน 20 MB ลองเลือก GIF ขนาดเล็กลง'); return; }
+    if (f.size>5*1024*1024) { setErr('dg-err','ไฟล์ใหญ่เกิน 5 MB ลองเลือก GIF ขนาดเล็กลง'); return; }
     setErr('dg-err',''); pendingFile=f; setPreview(URL.createObjectURL(f));
   }
   function fillGif(k){

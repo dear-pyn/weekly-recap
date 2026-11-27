@@ -81,10 +81,10 @@
 
   const assets = {
     async upload(file) {
-      if (file.size > 20 * 1024 * 1024) throw { code: "too_large" };
+      if (file.size > 5 * 1024 * 1024) throw { code: "too_large" };
       const ext = (file.type.split("/")[1] || "bin").replace("jpeg", "jpg");
       const id = rid() + "." + ext;
-      const { error } = await sb.storage.from(BUCKET).upload(id, file, { contentType: file.type, upsert: false });
+      const { error } = await sb.storage.from(BUCKET).upload(id, file, { contentType: file.type, upsert: false, cacheControl: "31536000" } /* file names never change: browsers keep them a year */);
       if (error) throw toErr(error);
       return { id };
     },

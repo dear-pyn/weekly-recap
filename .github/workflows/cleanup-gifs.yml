@@ -1,0 +1,26 @@
+name: Cleanup old GIFs
+
+on:
+  schedule:
+    - cron: "0 17 * * 0" # every Monday 00:00 Bangkok time
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Only count, do not delete"
+        type: boolean
+        default: true
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: node scripts/cleanup-gifs.mjs
+        env:
+          SUPABASE_URL: https://raetgyyymogvslducacr.supabase.co
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          KEEP_DAYS: "90"
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run || 'false' }}

@@ -30,10 +30,10 @@ do $$ begin
   end if;
 end $$;
 
--- GIF files: public bucket, 20 MB, images only
+-- GIF files: public bucket, 5 MB each, images only
 insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
-values ('retro-gifs', 'retro-gifs', true, 20971520, array['image/gif','image/webp','image/png','image/jpeg'])
-on conflict (id) do nothing;
+values ('retro-gifs', 'retro-gifs', true, 5242880, array['image/gif','image/webp','image/png','image/jpeg'])
+on conflict (id) do update set public = true, file_size_limit = excluded.file_size_limit, allowed_mime_types = excluded.allowed_mime_types;
 drop policy if exists "retro gif upload" on storage.objects;
 create policy "retro gif upload" on storage.objects for insert to anon, authenticated with check (bucket_id = 'retro-gifs');
 

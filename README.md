@@ -20,11 +20,22 @@
 | `store.js` | ต่อ Supabase ให้หน้าใช้ API แบบเดียวกับตอนอยู่บน claude.ai (`db` · `assets` · `user` · `downloads`) |
 | `config.js` | URL และ publishable key ของ Supabase |
 | `schema.sql` | ตาราง `retro_docs` + bucket `retro-gifs` + สิทธิ์ |
+| `scripts/cleanup-gifs.mjs` · `.github/workflows/cleanup-gifs.yml` | ลบ GIF เก่ากว่า 90 วัน ทุกสัปดาห์ |
 | `avatars/` | รูปสมาชิก (ชื่อไฟล์ตาม key ใน `MEMBERS` ของ `index.html`) |
 
 ## เพิ่ม/แก้สมาชิก
 
 แก้ `MEMBERS` ใน `index.html` แล้ววางรูป `avatars/<key>.webp`
+
+## ประหยัดโควตา Supabase free plan
+
+- GIF ไม่เกิน 5 MB ต่อไฟล์ · เบราว์เซอร์จำไฟล์ไว้ 1 ปี (เปิดบอร์ดซ้ำไม่ดาวน์โหลดใหม่)
+- ลบ GIF ที่เก่ากว่า 90 วันทุกวันจันทร์ ด้วย GitHub Action `Cleanup old GIFs` (ข้อความยังอยู่ การ์ดขึ้นว่า "GIF ถูกลบไปแล้ว")
+  - ต้องตั้ง secret ก่อน: repo → Settings → Secrets and variables → Actions → New repository secret
+    ชื่อ `SUPABASE_SERVICE_KEY` · ค่า = secret key ของ project weekly-recap (Supabase → Project Settings → API Keys)
+  - ยังไม่ตั้ง = Action ข้ามไปเฉย ๆ ไม่ลบอะไร
+  - ลองนับก่อนลบ: Actions → Cleanup old GIFs → Run workflow (dry run ติ๊กไว้)
+- Free plan หยุด project ถ้าไม่มีคนใช้ราว 1 สัปดาห์ → เข้า Supabase dashboard กด Restore (ข้อมูลไม่หาย)
 
 ## ข้อควรรู้
 
